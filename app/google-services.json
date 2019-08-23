@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "384240719619",
+    "firebase_url": "https://avana-874db.firebaseio.com",
+    "project_id": "avana-874db",
+    "storage_bucket": "avana-874db.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:384240719619:android:e7e9e4f58e969112",
+        "android_client_info": {
+          "package_name": "mz.co.avana"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "384240719619-l0pldoh64bmkf73p05s647pv3qt9nmeg.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "mz.co.avana",
+            "certificate_hash": "4a713bab70935619ec676b61a31daa764bdcd80a"
+          }
+        },
+        {
+          "client_id": "384240719619-unv430jiao03jsfkhkfm2h62mlnmoac7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAfGRpSBOK8sGQuYvxuyGzTcK4-QAgBB0o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "384240719619-unv430jiao03jsfkhkfm2h62mlnmoac7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
