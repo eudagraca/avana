@@ -10,28 +10,40 @@ import mz.co.avana.R
 import mz.co.avana.database.FirebaseConfig
 import mz.co.avana.model.Images
 import mz.co.avana.model.Item
+import mz.co.avana.repository.user.UserRepository
 import mz.co.avana.utils.Constants
 import mz.co.avana.utils.MessageCallback
-import mz.co.avana.utils.Utils
 import java.util.*
 
 class ItemRepository(val context: Context, val item: Item, val images: ArrayList<Uri>) {
+    var imagesLink = arrayListOf<String>()
 
     fun shareItemDetails(messageCallback: MessageCallback) {
         val map = HashMap<String, Any>()
+        val imgLink = HashMap<String, Any>()
         val reference = FirebaseConfig.firebaseFirestore().collection(Constants.ITEM)
         reference.add(item).addOnSuccessListener { documentReference ->
-            uploadImage(documentReference.id, object : OnUploadImageCallback {
+            uploadImage(UserRepository.user(), object : OnUploadImageCallback {
                 override fun onUpload(images: Images) {
                     val array = arrayOf(
                             images.imageOne.toString(),
                             images.imageTwo.toString(), images.imageThree.toString()
                     )
                     map["images"] = listOf(*array)
+
+                    val imgbackup = arrayOf(
+                            imagesLink[0],
+                            imagesLink[1],
+                            imagesLink[2]
+                    )
+
+                    imgLink["imagesLink"] = listOf(*imgbackup)
                     reference.document(documentReference.id).update(map).addOnCompleteListener { task ->
                         if (task.isSuccessful) {
+                            reference.document(documentReference.id).update(imgLink).addOnCompleteListener {
 
-                            messageCallback.onSuccess(successMessage = "Item shared successfull")
+                                messageCallback.onSuccess(successMessage = "Item shared successfull")
+                            }
                         } else {
                             reference.document(documentReference.id).delete()
                             messageCallback.onError(errorMessage = "Failed to share")
@@ -46,13 +58,17 @@ class ItemRepository(val context: Context, val item: Item, val images: ArrayList
         }
     }
 
-    private fun uploadImage(itemID: String, onUploadImageCallback: OnUploadImageCallback) {
+    private fun uploadImage(userID: String, onUploadImageCallback: OnUploadImageCallback) {
         var counter = 0
         val img = Images()
+        var imagelist: String
         for (image in images) {
             if (image.toString().isNotEmpty()) {
+                imagelist = userID + "/" + UUID.randomUUID().toString()
+                imagesLink.add("items_images/$imagelist")
                 val ref = FirebaseConfig.firebaseStorage().reference
-                        .child("items_images/" + itemID + "/" + UUID.randomUUID().toString())
+                        .child("items_images/").child(imagelist)
+
                 val uploadTask = ref.putFile(image)
                 uploadTask.continueWithTask(Continuation<UploadTask.TaskSnapshot, Task<Uri>> { task ->
                     if (!task.isSuccessful) {

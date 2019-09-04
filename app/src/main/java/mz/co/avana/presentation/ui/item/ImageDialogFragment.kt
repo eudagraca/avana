@@ -15,11 +15,9 @@ class ImageDialogFragment : DialogFragment(), View.OnClickListener {
 
     companion object {
         const val KEY = "item_image"
-
         const val COUNT_PLUS = 1
         const val COUNT_LESS = -1
     }
-
 
     lateinit var item: Item
     var imagePosition: Int = 0
@@ -44,8 +42,6 @@ class ImageDialogFragment : DialogFragment(), View.OnClickListener {
             container, false
         )
     }
-
-
     /*
      * Os acessos as Views estão no método onResume(), pois somente
      * depois de onCreateView() é que podemos utilizar a sintaxe
@@ -59,7 +55,7 @@ class ImageDialogFragment : DialogFragment(), View.OnClickListener {
          * Acessando dados enviados de CarAdapter depois do
          * acionamento de algum item em lista.
          * */
-        item = arguments!!.getParcelable(KEY) as Item
+        item = arguments!!.getParcelable<Item>(KEY) as Item
         imagePosition = arguments!!.getInt(Item.KEY_IMAGE)
 
         iv_close.setOnClickListener(this)
@@ -109,7 +105,7 @@ class ImageDialogFragment : DialogFragment(), View.OnClickListener {
 
         Glide
             .with(context!!)
-            .load(item.images[imagePosition])
+            .load(item.images!![imagePosition])
             .into(iv_image)
 
         verifyButtons()
@@ -128,7 +124,7 @@ class ImageDialogFragment : DialogFragment(), View.OnClickListener {
                 View.VISIBLE
 
         iv_arrow_right.visibility =
-            if (imagePosition == item.images.size - 1)
+            if (imagePosition == item.images!!.size - 1)
                 View.GONE
             else
                 View.VISIBLE

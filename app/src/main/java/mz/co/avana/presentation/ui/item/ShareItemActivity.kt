@@ -8,7 +8,6 @@ import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import android.widget.LinearLayout
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
@@ -16,6 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import co.csadev.kwikpicker.KwikPicker
 import com.bumptech.glide.Glide
 import com.google.android.material.bottomsheet.BottomSheetBehavior
+import kotlinx.android.synthetic.main.activity_share_item.*
 import kotlinx.android.synthetic.main.bootom_sheet_categories.*
 import kotlinx.android.synthetic.main.form_item.*
 import kotlinx.android.synthetic.main.list_pictures.*
@@ -79,7 +79,7 @@ class ShareItemActivity : AppCompatActivity() {
                     BottomSheetBehavior.STATE_EXPANDED -> {
 
                         with(rv_Categories) {
-                            layoutManager = GridLayoutManager(applicationContext, 3)
+                            layoutManager = GridLayoutManager(applicationContext, 4)
                             setHasFixedSize(true)
                             adapter = CategoryAdapter(getCat(), applicationContext) { categories ->
 
@@ -96,35 +96,27 @@ class ShareItemActivity : AppCompatActivity() {
             }
         })
 
-
-        formimages.setOnClickListener {
-            selectImages()
-        }
-
         share.setOnClickListener {
             if (isValidInput()) {
                 val item = Item(
-                        itemName.editText!!.text.toString(),
-                        location.editText!!.text.toString(),
-                        description.editText!!.text.toString(),
-                        itemPrice.editText!!.text.toString().toDouble(),
-                        promotionPrice.editText!!.text.toString().toDouble()
-                        , Category("head", selectCategory.text.toString()),
-                        Utils.dateToMills(end_promo.text.toString()),
-                        images!!,
-                        store.editText.toString(),
-                        UserRepository.user()
+                    itemName.editText!!.text.toString(),
+                    location.editText!!.text.toString().capitalize(),
+                    description.editText!!.text.toString(),
+                    itemPrice.editText!!.text.toString().toDouble(),
+                    promotionPrice.editText!!.text.toString().toDouble()
+                    , Category("head", selectCategory.text.toString()),
+                    Utils.dateToMills(end_promo.text.toString()),
+                    store.editText!!.text.toString(),
+                    UserRepository.user()
                 )
-
-                Toast.makeText(baseContext, Utils.dateToMills(end_promo.text.toString()).toString(), Toast.LENGTH_SHORT).show()
                 val itemRepository = ItemRepository(baseContext, item, listOfImages)
                 itemRepository.shareItemDetails(object : MessageCallback {
                     override fun onSuccess(successMessage: String) {
-                        Message.message(baseContext, successMessage)
+                        Message.snackbarMessage(baseContext, shareitem, successMessage)
                     }
 
                     override fun onError(errorMessage: String) {
-                        Message.message(baseContext, errorMessage)
+                        Message.snackbarMessage(baseContext, shareitem, errorMessage)
                     }
 
                 })
@@ -137,11 +129,11 @@ class ShareItemActivity : AppCompatActivity() {
             val month = calendar[Calendar.MONTH]
             val dayOfMonth = calendar[Calendar.DAY_OF_MONTH]
             val datePicker = DatePickerDialog(
-                    this@ShareItemActivity,
-                    DatePickerDialog.OnDateSetListener { _, y, m, day ->
-                        val text = String.format(resources.getString(R.string.show_date), day, m, y)
-                        end_promo.setText(text.trim())
-                    }, year, month, dayOfMonth
+                this@ShareItemActivity,
+                DatePickerDialog.OnDateSetListener { _, y, m, day ->
+                    val text = String.format(resources.getString(R.string.show_date), day, m + 1, y)
+                    end_promo.setText(text.trim())
+                }, year, month, dayOfMonth
             )
             datePicker.datePicker.minDate = System.currentTimeMillis()
             datePicker.show()
@@ -151,7 +143,11 @@ class ShareItemActivity : AppCompatActivity() {
     private fun isValidInput(): Boolean {
         var invalid = false
 
-        if (validate(itemName) || validateLength(itemName)) {
+        if (listOfImages.size < 3) {
+
+            Message.messageToast(baseContext, "Select three (3) pictures")
+
+        } else if (validate(itemName) || validateLength(itemName)) {
             itemName.error = getString(R.string.invalid_name)
             itemName.requestFocus()
 
@@ -200,13 +196,17 @@ class ShareItemActivity : AppCompatActivity() {
 
     fun getCat(): List<Category> {
         return listOf(
-                Category("", "ESCOLA"),
-                Category("", "ELETRONICO"),
-                Category("", "ESCRITORIO"),
-                Category("", "CARRO"),
-                Category("", "CASA"),
-                Category("", "MATERIA")
+            Category("", "ESCOLA"),
+            Category("", "ELETRONICO"),
+            Category("", "ESCRITORIO"),
+            Category("", "CARRO"),
+            Category("", "CASA"),
+            Category("", "MATERIA")
         )
+    }
+
+    fun openAlbum(view: View) {
+        selectImages()
     }
 
     private fun selectImages() {
@@ -215,51 +215,51 @@ class ShareItemActivity : AppCompatActivity() {
 
         let { it1 ->
             AlertDialog.Builder(it1)
-                    .setTitle(getString(R.string.select_images))
-                    .setPositiveButton(getString(R.string.gallery)) { dialog, _ ->
-                        dialog.dismiss()
+                .setTitle(getString(R.string.select_images))
+                .setPositiveButton(getString(R.string.gallery)) { dialog, _ ->
+                    dialog.dismiss()
 
-                        val kwikPicker = KwikPicker.Builder(
-                                this@ShareItemActivity,
-                                imageProvider = { imageView, uri ->
-                                    Glide.with(this@ShareItemActivity)
-                                            .load(uri)
-                                            .into(imageView)
-                                },
-                                onMultiImageSelectedListener = { list: ArrayList<Uri> ->
-                                    for (i in list) {
-                                        when (contador) {
-                                            0 -> imageOne = i
-                                            1 -> imageTwo = i
-                                            2 -> imageThree = i
-                                        }
-                                        contador++
+                    val kwikPicker = KwikPicker.Builder(
+                        this@ShareItemActivity,
+                        imageProvider = { imageView, uri ->
+                            Glide.with(this@ShareItemActivity)
+                                .load(uri)
+                                .into(imageView)
+                        },
+                        onMultiImageSelectedListener = { list: ArrayList<Uri> ->
+                            for (i in list) {
+                                when (contador) {
+                                    0 -> imageOne = i
+                                    1 -> imageTwo = i
+                                    2 -> imageThree = i
+                                }
+                                contador++
 
-                                        listOfImages.add(i)
-                                    }
-                                    lista.clear()
-                                    lista.add(Images(imageOne, imageTwo, imageThree))
+                                listOfImages.add(i)
+                            }
+                            lista.clear()
+                            lista.add(Images(imageOne, imageTwo, imageThree))
 
-                                    with(rvPhoto, {
-                                        layoutManager = LinearLayoutManager(context)
-                                        setHasFixedSize(true)
-                                        adapter = ImagesAdapter(context, lista) {
-                                            selectImages()
-                                        }
-                                        formimages.visibility = View.GONE
-                                    })
+                            with(rvPhoto, {
+                                layoutManager = LinearLayoutManager(context)
+                                setHasFixedSize(true)
+                                adapter = ImagesAdapter(context, lista) {
+                                    selectImages()
+                                }
+                                formimages.visibility = View.GONE
+                            })
 
-                                },
-                                peekHeight = 1600,
-                                showTitle = false,
-                                selectMaxCount = 3,
-                                completeButtonText = "Done",
-                                emptySelectionText = "No Selection"
-                        ).create(baseContext)
+                        },
+                        peekHeight = 1600,
+                        showTitle = false,
+                        selectMaxCount = 3,
+                        completeButtonText = getString(R.string.done),
+                        emptySelectionText = "No Selection"
+                    ).create(baseContext)
 
-                        kwikPicker.show(supportFragmentManager)
-                    }
-                    .show()
+                    kwikPicker.show(supportFragmentManager)
+                }
+                .show()
         }
     }
 }

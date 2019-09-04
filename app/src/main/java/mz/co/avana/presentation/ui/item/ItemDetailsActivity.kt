@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.View
 import android.widget.ShareActionProvider
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ShareCompat
 import androidx.databinding.DataBindingUtil
@@ -14,6 +15,8 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import co.csadev.kwikpicker.KwikPicker
+import com.bumptech.glide.Glide
 import com.smarteist.autoimageslider.IndicatorAnimations
 import com.smarteist.autoimageslider.SliderAnimations
 import com.smarteist.autoimageslider.SliderView
@@ -28,6 +31,7 @@ import mz.co.avana.presentation.ui.main.HomeActivity
 import mz.co.avana.repository.comment.CommentRepository
 import mz.co.avana.repository.user.UserRepository
 import mz.co.avana.utils.Constants
+import mz.co.avana.utils.Message
 import mz.co.avana.utils.MessageCallback
 import mz.co.avana.utils.Utils
 import mz.co.avana.viewModel.comment.ComentViewModel
@@ -45,8 +49,12 @@ class ItemDetailsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         binding = DataBindingUtil.setContentView(
-                this, mz.co.avana.R.layout.activity_item_details
-        )
+                this, R.layout.activity_item_details)
+
+
+        ri_photo.setOnClickListener {
+            selectImages()
+        }
 
         btnBack.setOnClickListener {
             val intent = Intent(this@ItemDetailsActivity, HomeActivity::class.java)
@@ -55,13 +63,13 @@ class ItemDetailsActivity : AppCompatActivity() {
         }
 
         intent!!.let {
-            item = intent.extras!!.getParcelable(Constants.ITEM) as Item
+            item = intent.extras!!.getParcelable<Item>(Constants.ITEM) as Item
 
             end_promo_details.text = Utils.toNormalDate(item.date)
             //Put style of textview
             normalPriceDetails.paintFlags = normalPriceDetails.getPaintFlags() or Paint.STRIKE_THRU_TEXT_FLAG
 
-            val adapter = SliderAdapter(this, item.images)
+            val adapter = SliderAdapter(this, item.images!!)
             imageSlider.sliderAdapter = adapter
             imageSlider.setIndicatorAnimation(IndicatorAnimations.WORM) //set indicator animation by using SliderLayout.IndicatorAnimations. :WORM or THIN_WORM or COLOR or DROP or FILL or NONE or SCALE or SCALE_DOWN or SLIDE and SWAP!!
             imageSlider.setSliderTransformAnimation(SliderAnimations.SIMPLETRANSFORMATION)
@@ -75,7 +83,7 @@ class ItemDetailsActivity : AppCompatActivity() {
             userViewModel.userLiveData.observe(this, Observer { user ->
                 userPubliched.text = user.name
             })
-            userViewModel.specificUserData(item.userID)
+            userViewModel.specificUser(item.userID)
             binding.item = item
 
             loadComments()
@@ -90,6 +98,37 @@ class ItemDetailsActivity : AppCompatActivity() {
 
     }
 
+    private fun selectImages() {
+
+        let { it1 ->
+            AlertDialog.Builder(it1)
+                .setTitle(getString(R.string.select_images))
+                .setPositiveButton(getString(R.string.gallery)) { dialog, _ ->
+                    dialog.dismiss()
+
+                    val kwikPicker = KwikPicker.Builder(
+                        this@ItemDetailsActivity,
+                        imageProvider = { imageView, uri ->
+                            Glide.with(this@ItemDetailsActivity)
+                                .load(uri)
+                                .into(imageView)
+                        },
+                        onImageSelectedListener = {uri ->
+                            Glide.with(this@ItemDetailsActivity).load(uri).into(ri_photo)
+                        },
+                        peekHeight = 1600,
+                        showTitle = false,
+                        selectMaxCount = 1,
+                        completeButtonText = getString(R.string.done),
+                        emptySelectionText = "No Selection"
+                    ).create(baseContext)
+
+                    kwikPicker.show(supportFragmentManager)
+                }
+                .show()
+        }
+    }
+
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.share_menu, menu)
         menu.findItem(R.id.menu_item_share).also { menuItem ->
@@ -102,7 +141,7 @@ class ItemDetailsActivity : AppCompatActivity() {
         shareActionProvider?.setShareIntent(shareIntent)
     }
 
-    fun commentPost(view: View) {
+    fun commentPost() {
         val comment = Comment(UserRepository.user(),
                 til_comment.editText!!.text.toString(),
                 Utils.toNormalDate(System.currentTimeMillis()))
@@ -110,17 +149,17 @@ class ItemDetailsActivity : AppCompatActivity() {
         item.itemId?.let {
             repository.commentAnItem(it, object : MessageCallback {
                 override fun onSuccess(successMessage: String) {
-                    Utils.showMessage(baseContext, binding.root, successMessage)
+                    til_comment.editText!!.clearFocus()
+                    til_comment.editText!!.text.clear()
+                    Message.snackbarMessage(baseContext, binding.root, successMessage)
                     loadComments()
                 }
 
                 override fun onError(errorMessage: String) {
-                    Utils.showMessage(baseContext, binding.root, errorMessage)
+                    Message.snackbarMessage(baseContext, binding.root, errorMessage)
                 }
-
             })
         }
-
     }
 
     fun loadComments(){

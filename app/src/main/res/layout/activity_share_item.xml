@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:id="@+id/shareitem"
     tools:context=".presentation.ui.item.ShareItemActivity">
 
     <include layout="@layout/form_item" />

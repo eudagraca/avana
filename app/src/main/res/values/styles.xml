@@ -7,16 +7,16 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:windowBackground">@color/md_white_1000</item>
-
         <item name="android:fontFamily">@font/work_sans</item>
-
         <item name="android:textColor">@color/primary_text_light</item>
-
         <item name="android:textColorHighlightInverse">@color/secondary_text_light</item>
-
         <item name="android:textColorHint">@color/disabled_text_light</item>
-
         <item name="android:textAllCaps">false</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowActionBar">false</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="colorError">@color/md_red_A700</item>
+
 
     </style>
 
@@ -37,4 +37,9 @@
         <item name="android:scaleType">fitCenter</item>
     </style>
 
+    <!--<style name="AppTheme.FullScreen"  parent="Theme.MaterialComponents.Light.NoActionBar">-->
+        <!--<item name="android:windowNoTitle">true</item>-->
+        <!--<item name="android:windowActionBar">false</item>-->
+        <!--<item name="android:windowContentOverlay">@null</item>-->
+    <!--</style>-->
 </resources>

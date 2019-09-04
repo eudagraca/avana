@@ -96,51 +96,52 @@
                             android:padding="20dp">
 
                             <LinearLayout
-                                android:id="@+id/ll_photos_container"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_alignParentStart="true"
-                                android:layout_marginTop="@dimen/default_margin_padding"
-                                android:layout_marginEnd="@dimen/default_margin_padding"
-                                android:orientation="horizontal"
-                                android:padding="6dp">
+                                    android:id="@+id/ll_photos_container"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentStart="true"
+                                    android:layout_marginTop="@dimen/default_margin_padding"
+                                    android:orientation="horizontal"
+                                    android:padding="6dp"
+                                    android:layout_toStartOf="@+id/likesDetails"
+                                    android:layout_marginEnd="0dp">
 
                                 <com.makeramen.roundedimageview.RoundedImageView
-                                    android:id="@+id/iv_img_thumb_01"
-                                    style="@style/AppTheme.DetailsRoundedImageView"
-                                    android:layout_marginEnd="5dp"
-                                    app:imageUrl="@{item.images[0]}"
-                                    app:riv_border_color="@android:color/transparent"
-                                    app:riv_border_width="2dp"
-                                    app:riv_corner_radius="5dp"
-                                    app:riv_mutate_background="true"
-                                    app:riv_oval="false"
-                                    app:riv_tile_mode="clamp" />
+                                        android:id="@+id/iv_img_thumb_01"
+                                        style="@style/AppTheme.DetailsRoundedImageView"
+                                        android:layout_marginEnd="5dp"
+                                        app:imageUrl="@{item.images[0]}"
+                                        app:riv_border_color="@android:color/transparent"
+                                        app:riv_border_width="2dp"
+                                        app:riv_corner_radius="5dp"
+                                        app:riv_mutate_background="true"
+                                        app:riv_oval="false"
+                                        app:riv_tile_mode="clamp"/>
 
                                 <com.makeramen.roundedimageview.RoundedImageView
-                                    android:id="@+id/iv_img_thumb_02"
-                                    style="@style/AppTheme.DetailsRoundedImageView"
-                                    android:layout_marginEnd="5dp"
-                                    android:layout_marginRight="5dp"
-                                    app:imageUrl="@{item.images[1]}"
-                                    app:riv_border_color="@android:color/transparent"
-                                    app:riv_border_width="2dp"
-                                    app:riv_corner_radius="5dp"
-                                    app:riv_mutate_background="true"
-                                    app:riv_oval="false"
-                                    app:riv_tile_mode="clamp" />
+                                        android:id="@+id/iv_img_thumb_02"
+                                        style="@style/AppTheme.DetailsRoundedImageView"
+                                        android:layout_marginEnd="5dp"
+                                        android:layout_marginRight="5dp"
+                                        app:imageUrl="@{item.images[1]}"
+                                        app:riv_border_color="@android:color/transparent"
+                                        app:riv_border_width="2dp"
+                                        app:riv_corner_radius="5dp"
+                                        app:riv_mutate_background="true"
+                                        app:riv_oval="false"
+                                        app:riv_tile_mode="clamp"/>
 
                                 <com.makeramen.roundedimageview.RoundedImageView
-                                    android:id="@+id/iv_img_thumb_03"
-                                    style="@style/AppTheme.DetailsRoundedImageView"
-                                    android:layout_marginEnd="5dp"
-                                    app:imageUrl="@{item.images[2]}"
-                                    app:riv_border_color="@android:color/transparent"
-                                    app:riv_border_width="2dp"
-                                    app:riv_corner_radius="5dp"
-                                    app:riv_mutate_background="true"
-                                    app:riv_oval="false"
-                                    app:riv_tile_mode="clamp" />
+                                        android:id="@+id/iv_img_thumb_03"
+                                        style="@style/AppTheme.DetailsRoundedImageView"
+                                        android:layout_marginEnd="5dp"
+                                        app:imageUrl="@{item.images[2]}"
+                                        app:riv_border_color="@android:color/transparent"
+                                        app:riv_border_width="2dp"
+                                        app:riv_corner_radius="5dp"
+                                        app:riv_mutate_background="true"
+                                        app:riv_oval="false"
+                                        app:riv_tile_mode="clamp"/>
 
 
                             </LinearLayout>
@@ -174,20 +175,20 @@
 
                             </LinearLayout>
 
-                            <!--<TextView-->
-                            <!--android:id="@+id/likesDetails"-->
-                            <!--android:layout_width="wrap_content"-->
-                            <!--android:layout_height="wrap_content"-->
-                            <!--android:layout_alignParentEnd="true"-->
-                            <!--android:layout_marginTop="5dp"-->
-                            <!--android:layout_marginEnd="0dp"-->
-                            <!--android:drawableTop="@drawable/ic_heart_simple"-->
-                            <!--android:fontFamily="@font/work_sans_light"-->
-                            <!--android:gravity="center"-->
-                            <!--android:padding="10dp"-->
-                            <!--android:textSize="16sp"-->
-                            <!--android:text="@{Long.toString(item.likes)}"-->
-                            <!--/>-->
+                            <TextView
+                            android:id="@+id/likesDetails"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginEnd="0dp"
+                            android:drawableTop="@drawable/ic_heart_simple"
+                            android:fontFamily="@font/work_sans_light"
+                            android:gravity="center"
+
+                            android:padding="10dp"
+                            android:textSize="16sp"
+                            />
 
                             <LinearLayout
                                 android:id="@+id/lluserpublished"
@@ -287,7 +288,7 @@
                                     android:fontFamily="@font/work_sans_medium"
                                     android:gravity="center"
                                     android:padding="@dimen/default_margin_padding"
-                                    android:text="@string/categorie"
+                                    android:text="@string/category"
                                     android:textColor="@color/colorPrimaryDark" />
 
                                 <View
@@ -402,14 +403,15 @@
 
                     <com.makeramen.roundedimageview.RoundedImageView
                         android:id="@+id/ri_photo"
-                        style="@style/AppTheme.DialogButton"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
                         android:layout_marginEnd="0dp"
+                        android:src="@drawable/ic_frame"
                         app:riv_border_color="@android:color/transparent"
                         app:riv_border_width="2dp"
                         app:riv_corner_radius="5dp"
                         app:riv_mutate_background="true"
                         app:riv_oval="false"
-                        android:src="@drawable/ic_frame"
                         android:layout_centerVertical="true"
                         android:layout_alignParentStart="true"
                         app:riv_tile_mode="clamp" />

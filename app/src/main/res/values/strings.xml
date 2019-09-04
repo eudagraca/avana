@@ -51,7 +51,7 @@
     <string name="logo">logo</string>
     <string name="location">Location</string>
     <string name="ends_on">Ends on</string>
-    <string name="categorie">Categorie</string>
+    <string name="category">Category</string>
     <string name="find_it_at">Find it at:</string>
     <string name="iv_desc_next_image">Next</string>
     <string name="iv_desc_prev_image">Previous</string>
@@ -67,7 +67,18 @@
     <string name="shared_by">Shared by</string>
     <string name="close">close</string>
     <string name="please_upload_photo">Please Upload an Image</string>
-    <string name="comment_sended">Comment sended</string>
+    <string name="comment_sended">Comment sent</string>
     <string name="unable_to_comment">Unable to comment, try again</string>
+    <string name="done">Done</string>
+    <string name="one_more_like">+1</string>
+    <string name="like_remove">-1</string>
+    <string name="failed">Failed</string>
+    <string name="you_are_see_itens_from">Itens from <b>%1$s</b> in %2$s <u>province</u></string>
+    <string name="please_enable_gps">Your GPS seems to be disabled. Please enable it to use the application</string>
+    <string name="if_you_dont_enable">If you don\'t enable it, you will not be able to use the application.</string>
+    <string name="dont_enable_gps">don\'t enable GPS</string>
+    <string name="enable_gps">enable GPS</string>
+    <string name="warning">Warning</string>
+    <string name="edit">edit</string>
 
 </resources>

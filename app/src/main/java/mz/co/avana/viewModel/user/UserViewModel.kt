@@ -23,7 +23,7 @@ class UserViewModel : ViewModel() {
                 }
     }
 
-    fun specificUserData(userID: String) {
+    fun specificUser(userID: String) {
         FirebaseConfig.firebaseFirestore().collection(Constants.USER).document(userID)
                 .get().addOnSuccessListener { documentSnapshot ->
                     val userData = User(

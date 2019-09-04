@@ -2,25 +2,20 @@ package mz.co.avana.model
 
 import android.os.Parcel
 import android.os.Parcelable
-import android.widget.ImageView
-import androidx.databinding.BindingAdapter
-import com.bumptech.glide.request.RequestOptions
-import com.bumptech.glide.Glide
-import com.makeramen.roundedimageview.RoundedImageView
 
 
 class Item(
-    var name: String,
-    var location: String,
-    var description: String,
-    var normalPrice: Double,
-    var currentPrice: Double,
-    var category: Category,
-    var date: Long,
-    var images: ArrayList<String>,
-    var store: String,
-    var userID: String,
-    var itemId: String?) : Parcelable {
+        var name: String,
+        var location: String,
+        var description: String,
+        var normalPrice: Double,
+        var currentPrice: Double,
+        var category: Category,
+        var date: Long,
+        var images: ArrayList<String>?,
+        var store: String,
+        var userID: String,
+        var itemId: String?) : Parcelable {
 
     constructor(name: String,
                 location: String,
@@ -31,9 +26,23 @@ class Item(
                 date: Long,
                 images: ArrayList<String>,
                 store: String,
-                userID: String) : this(name = name, location = location, description = description,
-        normalPrice = normalPrice, currentPrice = currentPrice, category = category, date = date, images = images,
-        store = store, userID = userID, itemId = null)
+                userID: String) : this(
+            name = name, location = location, description = description,
+            normalPrice = normalPrice, currentPrice = currentPrice, category = category, date = date, images = images,
+            store = store, userID = userID, itemId = null)
+
+    constructor(name: String,
+                location: String,
+                description: String,
+                normalPrice: Double,
+                currentPrice: Double,
+                category: Category,
+                date: Long,
+                store: String,
+                userID: String) : this(
+            name = name, location = location, description = description,
+            normalPrice = normalPrice, currentPrice = currentPrice, category = category, date = date, images = null,
+            store = store, userID = userID, itemId = null)
 
     constructor(parcel: Parcel) : this(
             parcel.readString()!!,
@@ -47,7 +56,7 @@ class Item(
             parcel.readString()!!,
             parcel.readString()!!,
             parcel.readString()!!
-        )
+    )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(name)

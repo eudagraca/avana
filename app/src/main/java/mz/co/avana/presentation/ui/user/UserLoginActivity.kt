@@ -29,6 +29,9 @@ class UserLoginActivity : AppCompatActivity() {
             login.signInWithEmailAndPassword(object : MessageCallback {
                 override fun onSuccess(successMessage: String) {
                     Toast.makeText(baseContext, successMessage, Toast.LENGTH_SHORT).show()
+                    val intent = Intent(baseContext, HomeActivity::class.java)
+                    startActivity(intent)
+                    finish()
                 }
 
                 override fun onError(errorMessage: String) {
@@ -38,7 +41,7 @@ class UserLoginActivity : AppCompatActivity() {
         }
     }
 
-    fun getInput() {
+    private fun getInput() {
         user.email = emilSignIn.editText!!.text.toString()
         user.password = passwordSignIn.editText!!.text.toString()
     }

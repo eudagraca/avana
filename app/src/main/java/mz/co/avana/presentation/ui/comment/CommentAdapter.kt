@@ -42,7 +42,7 @@ class CommentAdapter(private val commentList: List<Comment>, val context: Contex
 
         fun bindViews(comment: Comment) {
             text!!.text = comment.text
-            date!!.text = comment.date.toString()
+            date!!.text = comment.date
 
             Glide.with(context).load("https://miro.medium.com/max/1920/1*pUfkEqu7fdN_khSnach9BQ.png").into(this.image!!)
 

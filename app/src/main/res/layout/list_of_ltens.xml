@@ -80,15 +80,15 @@
                 android:textStyle="bold"
                 tools:text="500MZN" />
 
-            <TextView
-                android:id="@+id/tvLikes"
+            <ImageButton
+                android:id="@+id/ivLikes"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignRight="@id/tvPrice"
                 android:layout_alignBottom="@+id/tvPrice"
                 android:layout_alignParentEnd="true"
                 android:layout_marginBottom="0dp"
-                android:drawableStart="@drawable/ic_heart_simple"
+                android:src="@drawable/ic_heart_simple"
                 android:gravity="center"
                 android:padding="10dp"
                 android:textSize="18sp" />

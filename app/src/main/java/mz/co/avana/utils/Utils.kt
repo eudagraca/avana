@@ -1,57 +1,88 @@
+@file:Suppress("NAME_SHADOWING")
+
 package mz.co.avana.utils
 
+import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Context
 import android.util.Patterns
-import android.view.View
 import androidx.databinding.BindingAdapter
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import com.bumptech.glide.Glide
-import com.google.android.material.snackbar.Snackbar
 import com.makeramen.roundedimageview.RoundedImageView
-import mz.co.avana.R
+import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
 import java.util.regex.Matcher
 
 
-class Utils {
+object Utils {
 
-    companion object {
 
-        private val pattern = Patterns.EMAIL_ADDRESS
-        private var matcher: Matcher? = null
+    private val pattern = Patterns.EMAIL_ADDRESS
+    private var matcher: Matcher? = null
 
-        fun validateEmail(email: String): Boolean {
-            matcher = pattern.matcher(email)
-            return matcher!!.matches()
+    fun validateEmail(email: String): Boolean {
+        matcher = pattern.matcher(email)
+        return matcher!!.matches()
+    }
+
+    fun validatePassword(password: String): Boolean {
+        return password.length > 6
+    }
+
+    @SuppressLint("SimpleDateFormat")
+    fun dateToMills(date: String): Long {
+        val df = SimpleDateFormat("dd/MM/yyyy")
+
+        var parsedDate = Date()
+        try {
+            parsedDate = df.parse(date)!!
+        } catch (e: ParseException) {
+            e.printStackTrace()
         }
 
-        fun validatePassword(password: String): Boolean {
-            return password.length > 6
-        }
+        return parsedDate.time
+    }
 
-        fun dateToMills(date: String): Long {
-            val df = SimpleDateFormat("yyyy.MM.dd HH:mm")
-            return df.parse(date).time
-        }
+    @SuppressLint("SimpleDateFormat")
+    fun toNormalDate(date: Long): String {
+        val date = Date(date)
+        val format = SimpleDateFormat("dd.MM.yyyy")
+        return format.format(date)
+    }
 
-        fun toNormalDate(date: Long): String {
-            val date = Date(date)
-            val format = SimpleDateFormat("dd.MM.yyyy")
-            return format.format(date)
-        }
+    @JvmStatic
+    @BindingAdapter("imageUrl")
+    fun loadImage(
+            view: RoundedImageView,
+            url: String
+    ) { // This methods should not have any return type, = declaration would make it return that object declaration.
+        Glide.with(view.context).load(url).into(view)
+    }
 
-        @JvmStatic
-        @BindingAdapter("imageUrl")
-        fun loadImage(view: RoundedImageView, url: String) { // This methods should not have any return type, = declaration would make it return that object declaration.
-            Glide.with(view.context).load(url).into(view)
-        }
 
-        fun showMessage(context: Context, view: View, message: String) {
-            val snackBar = Snackbar.make(view, message, Snackbar.LENGTH_LONG)
-            snackBar.setTextColor(context.resources.getColor(R.color.md_white_1000))
-            snackBar.show()
+    fun loadFragment(fragment: Fragment?, fl: Int, supportFragmentManager: FragmentManager) {
+        if (fragment != null) {
+            supportFragmentManager
+                    .beginTransaction()
+                    .replace(fl, fragment)
+                    .commit()
         }
+    }
 
+    fun writeSharedPreferences(key: String, value: String, activity: Activity){
+        val sharedPref = activity.getSharedPreferences(Constants.LOCATION, Context.MODE_PRIVATE)
+        with(sharedPref.edit()){
+            putString(key, value)
+            apply()
+        }
+    }
+
+    fun readPreference(key: String, activity: Activity):String{
+        val sharedPref = activity.getSharedPreferences(Constants.LOCATION, Context.MODE_PRIVATE)
+        return sharedPref.getString(key, "Offline")!!
     }
 
 

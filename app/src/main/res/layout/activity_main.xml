@@ -20,10 +20,12 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:backgroundTint="@color/colorPrimary"
+        app:bbn_alwaysShowLabels="true"
         app:bbn_badgeProvider="@string/bbn_badgeProvider"
         app:bbn_entries="@menu/menu"
         app:bbn_scrollEnabled="true"
         app:layout_anchorGravity="bottom"
-        app:layout_behavior="@string/bbn_phone_view_behavior" />
+        app:layout_behavior="@string/bbn_phone_view_behavior"
+        app:layout_insetEdge="bottom" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

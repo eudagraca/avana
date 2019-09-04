@@ -16,6 +16,7 @@ import mz.co.avana.R
 import mz.co.avana.presentation.ui.item.ItemAdapter
 import mz.co.avana.presentation.ui.item.ItemDetailsActivity
 import mz.co.avana.utils.Constants
+import mz.co.avana.utils.Message
 import mz.co.avana.utils.MessageCallback
 import mz.co.avana.utils.Utils
 import mz.co.avana.viewModel.item.ItemViewModel
@@ -28,11 +29,11 @@ class UserProfile : Fragment(), MessageCallback {
 
     override fun onSuccess(successMessage: String) {
         userData()
-        Utils.showMessage(context!!, mView, successMessage)
+        Message.snackbarMessage(context!!, mView, successMessage)
     }
 
     override fun onError(errorMessage: String) {
-        Utils.showMessage(context!!, mView, errorMessage)
+        Message.snackbarMessage(context!!, mView, errorMessage)
     }
 
     lateinit var name: String

@@ -9,10 +9,12 @@ import androidx.viewpager.widget.ViewPager
 import kotlinx.android.synthetic.main.fragment_view_pager.view.*
 import mz.co.avana.R
 import mz.co.avana.presentation.ui.item.LowersFragment
-import mz.co.avana.presentation.ui.item.MostViewedFragment
 import mz.co.avana.presentation.ui.item.NearFragment
+import mz.co.avana.services.AppLocationService
 
 class ViewPagerFragment : Fragment() {
+
+    var appLocationService: AppLocationService? = null
 
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
@@ -20,6 +22,12 @@ class ViewPagerFragment : Fragment() {
     ): View? {
 
         val view = inflater.inflate(R.layout.fragment_view_pager, container, false)
+
+        appLocationService = AppLocationService(activity!!)
+        val province = Utils.readPreference(Constants.USER_LOCATION_PROVINCE, activity!!)
+
+        view.tv_currentlocation.text =  province
+
         setupViewPager(view.viewpager)
         return view
     }
@@ -27,7 +35,6 @@ class ViewPagerFragment : Fragment() {
     private fun setupViewPager(viewPager: ViewPager) {
         val adapter = ViewPagerAdapter(childFragmentManager)
         adapter.addFragment(LowersFragment(), getString(R.string.lowers))
-        adapter.addFragment(MostViewedFragment(), getString(R.string.most_discounted))
         adapter.addFragment(NearFragment(), getString(R.string.nearest))
         viewPager.adapter = adapter
     }
