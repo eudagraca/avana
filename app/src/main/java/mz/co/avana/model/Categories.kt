@@ -3,7 +3,7 @@ package mz.co.avana.model
 import android.os.Parcel
 import android.os.Parcelable
 
-data class Category(val image: String, val name: String) : Parcelable {
+data class Categorie(val image: String, val name: String) : Parcelable {
 
     constructor(parcel: Parcel) : this(
             parcel.readString()!!,
@@ -17,12 +17,12 @@ data class Category(val image: String, val name: String) : Parcelable {
 
     override fun describeContents() = 0
 
-    companion object CREATOR : Parcelable.Creator<Category> {
-        override fun createFromParcel(parcel: Parcel): Category {
-            return Category(parcel)
+    companion object CREATOR : Parcelable.Creator<Categorie> {
+        override fun createFromParcel(parcel: Parcel): Categorie {
+            return Categorie(parcel)
         }
 
-        override fun newArray(size: Int): Array<Category?> {
+        override fun newArray(size: Int): Array<Categorie?> {
             return arrayOfNulls(size)
         }
     }
