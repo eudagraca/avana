@@ -5,7 +5,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="item"
             type="mz.co.avana.model.Item" />
@@ -13,7 +12,6 @@
         <variable
             name="util"
             type="mz.co.avana.utils.Utils" />
-
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -28,7 +26,7 @@
             app:contentScrim="?attr/colorPrimary"
             app:expandedTitleGravity="top"
             app:expandedTitleMarginStart="20dp"
-            app:expandedTitleMarginTop="@dimen/bbn_badge_size"
+            app:expandedTitleMarginTop="@dimen/default_margin_padding"
             app:layout_scrollFlags="scroll|exitUntilCollapsed|snap">
 
             <RelativeLayout
@@ -52,9 +50,9 @@
                             android:layout_width="match_parent"
                             android:layout_height="300dp"
                             android:layout_marginTop="-20dp"
-                            android:background="@drawable/shape_radius"
+                            android:background="@drawable/radius_bottom"
                             android:elevation="0dp"
-                            app:cardCornerRadius="20dp"
+                            app:cardCornerRadius="@dimen/corners"
                             app:cardElevation="0dp"
                             app:strokeColor="@color/md_white_1000">
 
@@ -92,7 +90,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_below="@id/cardImage"
-                            android:background="@drawable/shape_radius"
+                            android:background="@drawable/radius_bottom"
                             android:padding="20dp">
 
                             <LinearLayout
@@ -101,10 +99,10 @@
                                     android:layout_height="wrap_content"
                                     android:layout_alignParentStart="true"
                                     android:layout_marginTop="@dimen/default_margin_padding"
+                                android:layout_marginEnd="0dp"
+                                android:layout_toStartOf="@+id/likesDetails"
                                     android:orientation="horizontal"
-                                    android:padding="6dp"
-                                    android:layout_toStartOf="@+id/likesDetails"
-                                    android:layout_marginEnd="0dp">
+                                android:padding="6dp">
 
                                 <com.makeramen.roundedimageview.RoundedImageView
                                         android:id="@+id/iv_img_thumb_01"
@@ -142,8 +140,6 @@
                                         app:riv_mutate_background="true"
                                         app:riv_oval="false"
                                         app:riv_tile_mode="clamp"/>
-
-
                             </LinearLayout>
 
 
@@ -161,8 +157,8 @@
                                     android:layout_height="wrap_content"
                                     android:fontFamily="@font/work_sans_medium"
                                     android:text="@{String.format(@string/show_new_price,Double.toString(item.currentPrice))}"
-                                    android:textColor="@color/md_grey_800"
-                                    android:textSize="20sp" />
+                                    android:textColor="@color/colorPrimary"
+                                    android:textSize="@dimen/font_size_extra_large" />
 
                                 <TextView
                                     android:id="@+id/normalPriceDetails"
@@ -171,24 +167,24 @@
                                     android:gravity="center"
                                     android:text="@{String.format(@string/show_old_price,Double.toString(item.normalPrice))}"
                                     android:textColor="@color/md_grey_500"
-                                    android:textSize="18sp" />
+                                    android:textSize="@dimen/font_size_medium"
+                                        android:fontFamily="@font/work_sans_light"/>
 
                             </LinearLayout>
 
                             <TextView
-                            android:id="@+id/likesDetails"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentEnd="true"
-                            android:layout_marginTop="5dp"
-                            android:layout_marginEnd="0dp"
-                            android:drawableTop="@drawable/ic_heart_simple"
-                            android:fontFamily="@font/work_sans_light"
-                            android:gravity="center"
-
-                            android:padding="10dp"
-                            android:textSize="16sp"
-                            />
+                                android:id="@+id/likesDetails"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentEnd="true"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginEnd="0dp"
+                                android:drawableTop="@drawable/ic_heart_simple"
+                                android:fontFamily="@font/work_sans_light"
+                                android:gravity="center"
+                                android:padding="10dp"
+                                android:text="@{Long.toString(item.likes)}"
+                                android:textSize="16sp" />
 
                             <LinearLayout
                                 android:id="@+id/lluserpublished"
@@ -206,17 +202,21 @@
                                     android:paddingEnd="@dimen/default_margin_padding"
                                     android:text="@string/shared_by"
                                     android:textAlignment="gravity"
-                                    android:textSize="16sp" />
+                                    android:textSize="@dimen/font_size_medium"
+                                    tools:ignore="RtlSymmetry" />
 
                                 <TextView
                                     android:id="@+id/userPubliched"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:ellipsize="end"
                                     android:fontFamily="@font/work_sans_medium"
                                     android:gravity="center"
+                                    android:maxLines="1"
+                                    android:singleLine="true"
                                     android:textAlignment="gravity"
                                     android:textColor="@color/colorPrimaryDark"
-                                    android:textSize="16sp"
+                                    android:textSize="@dimen/font_size_medium"
                                     tools:text="Fulano cicrano" />
                             </LinearLayout>
 
@@ -227,7 +227,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_below="@id/lluserpublished"
                                 android:layout_marginTop="@dimen/default_margin_padding"
-                                android:orientation="horizontal">
+                                android:orientation="vertical">
 
                                 <TextView
                                     android:layout_width="wrap_content"
@@ -236,7 +236,8 @@
                                     android:paddingEnd="@dimen/default_margin_padding"
                                     android:text="@string/find_it_at"
                                     android:textAlignment="gravity"
-                                    android:textSize="16sp" />
+                                    android:textSize="@dimen/font_size_medium"
+                                    tools:ignore="RtlSymmetry" />
 
                                 <TextView
                                     android:id="@+id/storeDetails"
@@ -244,24 +245,76 @@
                                     android:layout_height="wrap_content"
                                     android:drawableEnd="@drawable/ic_shop"
                                     android:drawablePadding="@dimen/default_margin_padding"
-                                    android:fontFamily="@font/work_sans_semibold"
+                                    android:ellipsize="end"
+                                    android:fontFamily="@font/work_sans_medium"
                                     android:gravity="center"
+                                    android:maxLines="1"
+                                    android:singleLine="true"
+                                    android:layout_marginTop="10dp"
+                                    android:textSize="@dimen/font_size_small"
                                     android:text="@{item.store}"
                                     android:textAlignment="gravity"
                                     android:textColor="@color/colorPrimaryDark"
-                                    android:textSize="16sp" />
+                                    android:textStyle="italic" />
                             </LinearLayout>
+
+                            <TextView
+                                android:id="@id/description"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@+id/llStore"
+                                android:layout_marginTop="15dp"
+                                android:layout_marginBottom="10dp"
+                                android:fontFamily="@font/work_sans_medium"
+                                android:text="@string/description"
+                                android:textColor="@color/md_grey_700"
+                                android:textSize="@dimen/font_size_medium"
+                                android:textStyle="italic" />
 
                             <TextView
                                 android:id="@+id/descriptionDetails"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_below="@id/llStore"
-                                android:layout_marginTop="15dp"
+                                android:layout_below="@id/description"
                                 android:fontFamily="@font/work_sans"
                                 android:text="@{item.description}"
                                 android:textAlignment="gravity"
-                                android:textSize="18sp" />
+                                android:textColor="@color/md_grey_800"
+                                android:textSize="16sp" />
+
+                            <TextView
+                                    android:id="@+id/feedBackText"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="20dp"
+                                    android:textStyle="italic"
+                                    android:layout_below="@id/descriptionDetails"
+                                    android:fontFamily="@font/work_sans_light"
+                                    android:text="@string/how_about_this_info"
+                                    android:textAlignment="gravity"
+                                    android:textColor="@color/md_grey_800"
+                                    android:textSize="@dimen/font_size_medium" />
+
+                            <ImageButton
+                                    android:id="@+id/ivPositive"
+                                    android:layout_width="36dp"
+                                    android:layout_height="36dp"
+                                    android:layout_below="@+id/feedBackText"
+                                    android:src="@drawable/ic_positive_vote"
+                                    android:gravity="center"
+                                    android:layout_alignParentStart="true"
+                                    android:background="@color/md_white_1000"/>
+
+                            <ImageButton
+                                    android:id="@+id/ivNegative"
+                                    android:layout_width="36dp"
+                                    android:layout_height="36dp"
+                                    android:layout_below="@+id/feedBackText"
+                                    android:src="@drawable/ic_negative_vote"
+                                    android:gravity="center"
+                                    android:layout_marginStart="20dp"
+                                    android:layout_toEndOf="@id/ivPositive"
+                                    android:background="@color/md_white_1000"/>
 
                         </RelativeLayout>
 
@@ -289,7 +342,7 @@
                                     android:gravity="center"
                                     android:padding="@dimen/default_margin_padding"
                                     android:text="@string/category"
-                                    android:textColor="@color/colorPrimaryDark" />
+                                    android:textColor="@color/md_grey_600" />
 
                                 <View
                                     android:layout_width="1dp"
@@ -304,7 +357,7 @@
                                     android:gravity="center"
                                     android:padding="@dimen/default_margin_padding"
                                     android:text="@string/ends_on"
-                                    android:textColor="@color/colorPrimaryDark" />
+                                    android:textColor="@color/md_grey_600" />
 
                                 <View
                                     android:layout_width="1dp"
@@ -319,7 +372,7 @@
                                     android:gravity="center"
                                     android:padding="@dimen/default_margin_padding"
                                     android:text="@string/location"
-                                    android:textColor="@color/colorPrimaryDark" />
+                                    android:textColor="@color/md_grey_600" />
 
                             </LinearLayout>
 
@@ -332,13 +385,18 @@
                                 android:orientation="horizontal">
 
                                 <TextView
-                                    android:id="@+id/category"
+                                    android:id="@+id/categories"
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
+                                    android:ellipsize="end"
                                     android:gravity="center"
+                                    android:maxLines="1"
                                     android:padding="@dimen/default_margin_padding"
-                                    android:text="@{item.category.name}" />
+                                    android:singleLine="true"
+                                    android:text="@{item.categories}"
+                                    android:textColor="@color/colorPrimary"
+                                    android:textSize="@dimen/font_size_small" />
 
                                 <View
                                     android:layout_width="1dp"
@@ -350,8 +408,13 @@
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
+                                    android:ellipsize="end"
                                     android:gravity="center"
-                                    android:padding="@dimen/default_margin_padding" />
+                                    android:maxLines="1"
+                                    android:padding="@dimen/default_margin_padding"
+                                    android:singleLine="true"
+                                    android:textColor="@color/colorPrimary"
+                                    android:textSize="@dimen/font_size_small" />
 
                                 <View
                                     android:layout_width="1dp"
@@ -363,9 +426,14 @@
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
+                                    android:ellipsize="end"
                                     android:gravity="center"
+                                    android:maxLines="1"
                                     android:padding="@dimen/default_margin_padding"
-                                    android:text="@{item.location}" />
+                                    android:singleLine="true"
+                                    android:text="@{item.location}"
+                                    android:textColor="@color/colorPrimary"
+                                    android:textSize="@dimen/font_size_small" />
 
                             </LinearLayout>
 
@@ -380,13 +448,22 @@
                             android:layout_marginBottom="20dp"
                             android:background="@color/md_grey_400" />
 
-                        <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/rv_comments"
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/view"
-                            android:scrollbars="none"
-                            tools:listitem="@layout/list_comments" />
+                            android:orientation="vertical">
+
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/rv_comments"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:scrollbars="none"
+                                tools:listitem="@layout/list_comments" />
+
+                            <include layout="@layout/loading" />
+
+                        </LinearLayout>
 
                     </RelativeLayout>
 
@@ -397,43 +474,27 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
-                    android:background="@color/md_orange_50"
+                    android:background="@color/md_grey_100"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent">
-
-                    <com.makeramen.roundedimageview.RoundedImageView
-                        android:id="@+id/ri_photo"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:layout_marginEnd="0dp"
-                        android:src="@drawable/ic_frame"
-                        app:riv_border_color="@android:color/transparent"
-                        app:riv_border_width="2dp"
-                        app:riv_corner_radius="5dp"
-                        app:riv_mutate_background="true"
-                        app:riv_oval="false"
-                        android:layout_centerVertical="true"
-                        android:layout_alignParentStart="true"
-                        app:riv_tile_mode="clamp" />
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/til_comment"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="5dp"
+                        android:layout_marginStart="0dp"
                         android:layout_marginTop="0dp"
                         android:layout_marginEnd="0dp"
-
+                            app:counterMaxLength="200"
                         android:layout_toStartOf="@+id/tv_send_comment"
-                        android:layout_toEndOf="@+id/ri_photo"
-                        android:backgroundTint="@color/md_grey_300"
+                        android:backgroundTint="@color/md_grey_100"
                         android:outlineProvider="none">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:background="@color/md_orange_50" />
+                            android:background="@color/md_grey_100" />
 
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -443,9 +504,11 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
                         android:layout_centerVertical="true"
+                        android:background="@color/md_grey_100"
+                        android:drawableEnd="@drawable/ic_send"
+                        android:drawableTint="@color/md_orange_800"
                         android:onClick="commentPost"
-                        android:background="@color/md_orange_50"
-                        android:drawableEnd="@drawable/ic_send_comment" />
+                        android:padding="10dp" />
                 </RelativeLayout>
 
             </RelativeLayout>

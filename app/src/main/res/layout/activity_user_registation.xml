@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.ui.user.UserRegistationActivity">
+    android:id="@+id/rl_user_reg"
+    tools:context=".presentation.ui.user.UserRegistrationActivity">
 
     <ScrollView
         android:id="@+id/scrollv"
@@ -12,14 +13,12 @@
         android:layout_height="match_parent"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true">
 
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-
 
             <LinearLayout
                 android:id="@+id/relativeLayout"
@@ -31,20 +30,21 @@
 
                 <ImageView
                     android:id="@+id/logo"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="100dp"
+                    android:layout_height="120dp"
+                    android:layout_marginTop="20dp"
                     android:layout_gravity="center"
-                    android:layout_marginTop="70dp"
-                    android:src="@mipmap/ic_launcher_round" />
+                    android:src="@drawable/ic_avana_logo_withe" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
-                    android:layout_marginTop="30dp"
                     android:layout_marginEnd="25dp"
                     android:layout_marginBottom="30dp"
                     android:text="@string/register"
+                    android:textAllCaps="true"
+                    android:fontFamily="@font/work_sans_light"
                     android:textColor="@color/md_white_1000"
                     android:textSize="18sp" />
 
@@ -89,27 +89,11 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/userCity"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/surnameSignup"
-                    android:layout_marginTop="10dp">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="@string/city_district"
-                        android:inputType="text" />
-                </com.google.android.material.textfield.TextInputLayout>
-
-
-                <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/emailSignup"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/userCity"
+                    android:layout_below="@id/surnameSignup"
                     android:layout_marginTop="10dp">
 
                     <com.google.android.material.textfield.TextInputEditText
@@ -139,33 +123,21 @@
 
                 </com.google.android.material.textfield.TextInputLayout>
 
-
-                <TextView
-                    android:id="@+id/forotPassword"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/passwordSignUp"
-                    android:layout_alignParentEnd="true"
-                    android:layout_gravity="end"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginBottom="10dp"
-                    android:text="@string/forgot_password"
-                    android:textAllCaps="false"
-                    android:textColor="@color/colorPrimaryDark" />
-
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/signUp"
-                    style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
-                    android:layout_width="match_parent"
+                        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                        app:cornerRadius="18dp"
+                        app:strokeColor="@color/colorPrimary"
+                        app:strokeWidth="1dp"
+                        android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/forotPassword"
+                    android:layout_below="@id/passwordSignUp"
                     android:layout_marginTop="12dp"
                     android:background="@drawable/gradient"
                     android:padding="15dp"
-                    android:text="@string/register"
+                    android:text="@string/register_user"
                     android:textAlignment="center"
                     android:textAllCaps="false" />
-
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -193,7 +165,6 @@
                 </LinearLayout>
 
             </RelativeLayout>
-
 
         </RelativeLayout>
 

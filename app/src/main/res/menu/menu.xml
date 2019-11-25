@@ -4,7 +4,7 @@
     <item
         android:id="@+id/home"
         android:icon="@drawable/ic_home"
-        android:title="@string/home" />
+        android:title="@string/casa" />
 
     <item
         android:id="@+id/newItem"
@@ -15,5 +15,10 @@
         android:id="@+id/profile"
         android:icon="@drawable/ic_user"
         android:title="@string/profile" />
+
+    <item
+        android:id="@+id/others"
+        android:icon="@drawable/ic_other"
+        android:title="@string/outros" />
 
 </menu>

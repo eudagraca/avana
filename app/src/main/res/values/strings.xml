@@ -1,10 +1,12 @@
 <resources>
     <string name="app_name">Avana</string>
     <string name="login">Login</string>
+    <string name="login_user">Login</string>
     <string name="forgot_password">Forgot password?</string>
     <string name="password">Password</string>
     <string name="email">Email</string>
     <string name="register">Register</string>
+    <string name="register_user">Register</string>
     <string name="don_t_have_an_account">Don\'t have an account?</string>
     <string name="name">Name</string>
     <string name="already_a_member">Already a member?</string>
@@ -12,18 +14,19 @@
     <string name="error_creating_user">Error on creating user</string>
     <string name="surname">Surname</string>
     <string name="welcome">Welcome</string>
-    <string name="show_percent">%1$s</string>
-    <string name="show_new_price">%1$s0 MZN</string>
-    <string name="show_old_price"><b>%1$s0 MZN</b></string>
-    <string name="show_username">%1$s %2$s</string>
-    <string name="show_nr_promotions">%1$s %2$s</string>
-    <string name="show_date">%1$d/%2$d/%3$d</string>
-    <string name="signin">SignIn</string>
+    <string name="show_percent" translatable="false">%1$s</string>
+    <string name="show_new_price" translatable="false">%1$s0 MT</string>
+    <string name="show_old_price" translatable="false">
+        <b>%1$s0 MT</b>
+    </string>
+    <string name="show_username" translatable="false">%1$s %2$s</string>
+    <string name="show_nr_promotions" translatable="false">%1$s %2$s</string>
+    <string name="show_date" translatable="false">%1$d/%2$d/%3$d</string>
+    <string name="signin">Sign In</string>
     <string name="promotions">Promotions</string>
     <string name="my_promotions">My promotions</string>
     <string name="share_item">Share item</string>
     <string name="profile">User Profile</string>
-    <string name="home">Home</string>
     <string name="lowers">Lowers</string>
     <string name="most_discounted">+ Discounted</string>
     <string name="nearest">Near</string>
@@ -43,15 +46,14 @@
     <string name="promotion_end_date_required">Promotion end date is required</string>
     <string name="store_that_sells_item">Store that sells the item required</string>
     <string name="where_the_item_is_located">Where the item is located</string>
-    <string name="item_escription_required">Item description is required</string>
+    <string name="item_description_required">Item description is required</string>
     <string name="choose_a_category">Choose a category</string>
     <string name="categories">Categories</string>
     <string name="gallery">Open Gallery</string>
     <string name="select_images">Select images of item</string>
-    <string name="logo">logo</string>
+    <string name="logo">Application logo</string>
     <string name="location">Location</string>
     <string name="ends_on">Ends on</string>
-    <string name="category">Category</string>
     <string name="find_it_at">Find it at:</string>
     <string name="iv_desc_next_image">Next</string>
     <string name="iv_desc_prev_image">Previous</string>
@@ -67,18 +69,112 @@
     <string name="shared_by">Shared by</string>
     <string name="close">close</string>
     <string name="please_upload_photo">Please Upload an Image</string>
-    <string name="comment_sended">Comment sent</string>
+    <string name="comment_sent">Comment sent</string>
     <string name="unable_to_comment">Unable to comment, try again</string>
     <string name="done">Done</string>
-    <string name="one_more_like">+1</string>
-    <string name="like_remove">-1</string>
+    <string name="one_more_like" translatable="false">+1</string>
+    <string name="like_remove" translatable="false">-1</string>
     <string name="failed">Failed</string>
-    <string name="you_are_see_itens_from">Itens from <b>%1$s</b> in %2$s <u>province</u></string>
+    <string name="you_are_see_itens_from">"Items from <b>%1$s</b> in %2$s         <u>province</u>     "</string>
     <string name="please_enable_gps">Your GPS seems to be disabled. Please enable it to use the application</string>
     <string name="if_you_dont_enable">If you don\'t enable it, you will not be able to use the application.</string>
-    <string name="dont_enable_gps">don\'t enable GPS</string>
-    <string name="enable_gps">enable GPS</string>
-    <string name="warning">Warning</string>
+    <string name="dont_enable_gps">Discard</string>
+    <string name="enable_gps">Enable</string>
+    <string name="warning">Warning!</string>
     <string name="edit">edit</string>
+    <string name="search">What are you looking for . . .</string>
+    <string name="hot_deals">Hot deals</string>
+    <string name="title_activity_search" translatable="false">SearchActivity</string>
+    <string name="action_settings">Settings</string>
+    <string name="price">Price (Metical)</string>
+    <string name="sharing_item">Sharing item</string>
+    <string name="category_selected">Selected: %1$s</string>
+    <string name="publication_time">"         <em>Publication date:</em>         %1$s     "</string>
+    <string name="end_at">"         <em>End at:</em>         %1$s     "</string>
+    <string name="delete">Delete</string>
+    <string name="update">Update</string>
+    <string name="please_wait">Please wait . . .</string>
+    <string name="select_three_pictures">Select three (3) pictures</string>
+    <string name="select_category">Select an category</string>
+    <string name="are_you_sure">Are you sure?</string>
+    <string name="wont_be_able_to_recover_this_file">Won\'t be able to recover this file!</string>
+    <string name="yes_delete_it">Yes, delete it!</string>
+    <string name="no_cancel">No, cancel</string>
+    <string name="filter">Filter</string>
+    <string name="no_item_found">No item found</string>
+    <string name="empty">Empty</string>
+    <string name="simple_price">Price</string>
+    <string name="min">min</string>
+    <string name="max">max</string>
+    <string name="order_by">Order by</string>
+    <string name="all">All</string>
+    <string name="what_are_you_look">What are you looking for . . .</string>
+
+    <!-- Categorias -->
+    <string name="educação">Education</string>
+    <string name="alimentos">Food</string>
+    <string name="automóveis">Cars</string>
+    <string name="computadores">Computers</string>
+    <string name="desporto">Sport</string>
+    <string name="vestuário">Clothes</string>
+    <string name="eletrodomésticos">Home appliances</string>
+    <string name="criançasebebés">Children and Babies</string>
+    <string name="saúdeebeleza">Health and Beauty</string>
+    <string name="Celulares">Cellphone</string>
+    <string name="casa">Home</string>
+    <string name="outros">Others</string>
+
+    <string name="emails_required">Your email is required</string>
+    <string name="passwords_required">Password is required</string>
+    <string name="surnames_required">Your surname is required</string>
+    <string name="names_required">Your name is required</string>
+    <string name="registering">Registering user</string>
+    <string name="enter_your_email">Enter your email</string>
+    <string name="enter_your_password">Enter your password</string>
+    <string name="logging">Accessing</string>
+    <string name="enter_valid_email">Enter a valid email</string>
+    <string name="passwords_short">Password must be longer than 7 characters</string>
+    <string name="invalid_email">Invalid email</string>
+    <string name="invalid_surname">Invalid surname</string>
+    <string name="title_activity_other_user_profile" translatable="false">OtherUserProfileActivity</string>
+    <string name="posts">Posts</string>
+    <string name="select_image_prof">Select image for your profile</string>
+    <string name="wont_be_able_to_recover_old_image">Wont be able to recover old image</string>
+    <string name="yes_change_it">Yes change it</string>
+    <string name="comment_required">Text of comment is required</string>
+    <string name="edit_this_item">Edit item</string>
+    <string name="category">Category</string>
+    <string name="image_item">Image item</string>
+    <string name="network_problem">Network Problem</string>
+    <string name="location_not_found">Location not found</string>
+    <string name="no_image_selected">No Selection</string>
+    <string name="email_inbox">A confirmation email has been sent, please verify your account</string>
+    <string name="like_item">Like the item</string>
+    <string name="open">Open</string>
+    <string name="profile_image">Profile image</string>
+    <string name="havent_share_item">You haven\'t shared items.</string>
+    <string name="there_are_no_item">There are no items on sale</string>
+    <string name="there_are_no_item_hot">There are no hot deals</string>
+    <string name="there_are_no_item_in_your_city">There are no items on sale in your city</string>
+    <string name="log_out">Log out this account?</string>
+    <string name="yes">Yes</string>
+    <string name="update_item">Updating item data</string>
+    <string name="press_again_exit">You want to exit? Press again</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
+    <string name="recover_password">Send password recover</string>
+    <string name="reset_password_text">We need your registration email to send password reset instructions.</string>
+    <string name="forgot_your_password">Forgot your password?</string>
+    <string name="i_know_my_credentials">I know my credentials</string>
+    <string name="found_int_the_city" translatable="false"> - %1$s</string>
+    <string name="find_this_at">%1$s that is low price at %2$s</string>
+    <string name="reset">reset</string>
+    <string name="how_about_this_info">How about this information reflects the reality?</string>
+    <string name="days_ago">Day(s) ago %1$s</string>
+    <string name="to_continue_this_action">To continue this action you need to login.</string>
+    <string name="upload_images_in_png_jpg_or_jpeg_">Upload images in PNG, JPG or JPEG format!</string>
+    <string name="actives">Actives</string>
+    <string name="products_i_posted">Products I posted</string>
 
 </resources>

@@ -16,13 +16,11 @@
         <item name="android:windowActionBar">false</item>
         <item name="android:windowContentOverlay">@null</item>
         <item name="colorError">@color/md_red_A700</item>
-
-
+        <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>
+        <item name="alertDialogTheme">@style/AlertDialogTheme</item>
     </style>
 
-
     <style name="AppTheme.DetailsRoundedImageView">
-
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">42dp</item>
         <item name="android:layout_weight">1</item>
@@ -31,15 +29,45 @@
     </style>
 
     <style name="AppTheme.DialogButton">
-
         <item name="android:layout_width">32dp</item>
         <item name="android:layout_height">32dp</item>
         <item name="android:scaleType">fitCenter</item>
     </style>
 
-    <!--<style name="AppTheme.FullScreen"  parent="Theme.MaterialComponents.Light.NoActionBar">-->
-        <!--<item name="android:windowNoTitle">true</item>-->
-        <!--<item name="android:windowActionBar">false</item>-->
-        <!--<item name="android:windowContentOverlay">@null</item>-->
-    <!--</style>-->
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
+
+    <style name="AppBottomSheetDialogTheme"
+           parent="Theme.MaterialComponents.Light.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/AppModalStyle</item>
+    </style>
+    <style name="alertTheme"
+           parent="Theme.MaterialComponents.Light.BottomSheetDialog">
+        <item name="android:background">@drawable/corner_default</item>
+        <item name="android:buttonTint">@color/colorPrimary</item>
+        <item name="android:positiveButtonText">@color/colorPrimary</item>
+        <item name="android:buttonStyle">@style/Widget.MaterialComponents.Button.TextButton</item>
+    </style>
+
+    <style name="AppModalStyle"
+           parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@drawable/radius_top</item>
+    </style>
+
+    <style name="AlertDialogTheme"
+           parent="Theme.Design.Light.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/AppDialogStyle</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+    </style>
+
+    <style name="AppDialogStyle" parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@drawable/corner_default</item>
+    </style>
+
 </resources>

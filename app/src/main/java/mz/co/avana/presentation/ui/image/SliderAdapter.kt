@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.CenterCrop
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.smarteist.autoimageslider.SliderViewAdapter
 import mz.co.avana.R
 
@@ -26,8 +28,8 @@ class SliderAdapter(val context: Context, val images: ArrayList<String>) :
     override fun getCount() = images.size
 
     class SliderAdapterVH(
-            val itemView: View,
-            val context: Context
+        private val itemView: View,
+        val context: Context
     ) : SliderViewAdapter.ViewHolder(itemView) {
 
         fun bindViews(image: String) {
@@ -36,6 +38,7 @@ class SliderAdapter(val context: Context, val images: ArrayList<String>) :
 
             Glide.with(context)
                     .load(image)
+                    .transform(CenterCrop(), RoundedCorners(30))
                     .into(imageView)
         }
     }

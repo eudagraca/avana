@@ -1,6 +1,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/form_item"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
@@ -42,7 +43,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/md_orange_100" />
+            android:background="@color/colorPrimaryDark" />
     </LinearLayout>
 
     <ScrollView
@@ -57,6 +58,14 @@
             android:layout_marginBottom="20dp"
             android:orientation="vertical"
             android:padding="15dp">
+
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/font_size_small"
+                    android:fontFamily="@font/work_sans_light"
+                    android:text="@string/upload_images_in_png_jpg_or_jpeg_"/>
 
             <include layout="@layout/list_pictures" />
 
@@ -246,8 +255,10 @@
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/share"
-                    style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
-                    android:layout_width="match_parent"
+                        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                        app:cornerRadius="18dp"
+                        app:strokeColor="@color/colorPrimary"
+                        app:strokeWidth="1dp"                        android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
                     android:layout_marginEnd="5dp"

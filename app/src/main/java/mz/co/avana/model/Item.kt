@@ -2,60 +2,123 @@ package mz.co.avana.model
 
 import android.os.Parcel
 import android.os.Parcelable
-
+import com.google.firebase.Timestamp
+import mz.co.avana.database.FirebaseConfig
 
 class Item(
-        var name: String,
-        var location: String,
-        var description: String,
-        var normalPrice: Double,
-        var currentPrice: Double,
-        var category: Category,
-        var date: Long,
-        var images: ArrayList<String>?,
-        var store: String,
-        var userID: String,
-        var itemId: String?) : Parcelable {
+    var name: String,
+    var location: String,
+    var description: String,
+    var normalPrice: Double,
+    var currentPrice: Double,
+    var categories: String,
+    var date: Long,
+    var images: ArrayList<String>?,
+    var store: String,
+    var userID: String,
+    var itemId: String?,
+    var likes: Long,
+    var percent: Long,
+    var createdAt: Long
+) : Parcelable {
 
-    constructor(name: String,
-                location: String,
-                description: String,
-                normalPrice: Double,
-                currentPrice: Double,
-                category: Category,
-                date: Long,
-                images: ArrayList<String>,
-                store: String,
-                userID: String) : this(
-            name = name, location = location, description = description,
-            normalPrice = normalPrice, currentPrice = currentPrice, category = category, date = date, images = images,
-            store = store, userID = userID, itemId = null)
+    constructor(
+        name: String,
+        location: String,
+        description: String,
+        normalPrice: Double,
+        currentPrice: Double,
+        categories: String,
+        date: Long,
+        images: ArrayList<String>,
+        store: String,
+        userID: String
+    ) : this(
+        name = name,
+        location = location,
+        description = description,
+        normalPrice = normalPrice,
+        currentPrice = currentPrice,
+        categories = categories,
+        date = date,
+        images = images,
+        store = store,
+        userID = userID,
+        likes = 0,
+        itemId = null,
+        percent = (((currentPrice - normalPrice) / normalPrice) * 100).toLong(),
+        createdAt = System.currentTimeMillis()
+    )
 
-    constructor(name: String,
-                location: String,
-                description: String,
-                normalPrice: Double,
-                currentPrice: Double,
-                category: Category,
-                date: Long,
-                store: String,
-                userID: String) : this(
-            name = name, location = location, description = description,
-            normalPrice = normalPrice, currentPrice = currentPrice, category = category, date = date, images = null,
-            store = store, userID = userID, itemId = null)
+    constructor(
+        name: String,
+        location: String,
+        description: String,
+        normalPrice: Double,
+        currentPrice: Double,
+        categories: String,
+        date: Long,
+        store: String,
+        userID: String
+    ) : this(
+        name = name,
+        location = location,
+        description = description,
+        normalPrice = normalPrice,
+        currentPrice = currentPrice,
+        categories = categories,
+        date = date,
+        images = null,
+        store = store,
+        userID = userID,
+        likes = 0,
+        itemId = null,
+        percent = (((currentPrice - normalPrice) / normalPrice) * 100).toLong(),
+        createdAt = System.currentTimeMillis()
+    )
+    constructor(
+        name: String,
+        location: String,
+        description: String,
+        normalPrice: Double,
+        currentPrice: Double,
+        categories: String,
+        date: Long,
+        store: String,
+        userID: String,
+        itemId: String
+    ) : this(
+        name = name,
+        location = location,
+        description = description,
+        normalPrice = normalPrice,
+        currentPrice = currentPrice,
+        categories = categories,
+        date = date,
+        images = null,
+        store = store,
+        userID = userID,
+        likes = 0,
+        itemId = itemId,
+        percent = (((currentPrice - normalPrice) / normalPrice) * 100).toLong(),
+        createdAt = System.currentTimeMillis()
+    )
 
     constructor(parcel: Parcel) : this(
-            parcel.readString()!!,
-            parcel.readString()!!,
-            parcel.readString()!!,
-            parcel.readDouble(),
-            parcel.readDouble(),
-            parcel.readParcelable(Category::class.java.classLoader)!!,
-            parcel.readLong(),
-            parcel.createStringArrayList()!!,
-            parcel.readString()!!,
-            parcel.readString()!!,
-            parcel.readString()!!
+        parcel.readString()!!,
+        parcel.readString()!!,
+        parcel.readString()!!,
+        parcel.readDouble(),
+        parcel.readDouble(),
+        parcel.readString()!!,
+        parcel.readLong(),
+        parcel.createStringArrayList()!!,
+        parcel.readString()!!,
+        parcel.readString()!!,
+        parcel.readString()!!,
+        parcel.readLong(),
+        parcel.readLong(),
+        parcel.readLong()
     )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
@@ -64,12 +127,14 @@ class Item(
         parcel.writeString(description)
         parcel.writeDouble(normalPrice)
         parcel.writeDouble(currentPrice)
-        parcel.writeParcelable(category, flags)
+        parcel.writeString(categories)
         parcel.writeLong(date)
         parcel.writeStringList(images)
         parcel.writeString(store)
         parcel.writeString(userID)
         parcel.writeString(itemId)
+        parcel.writeLong(likes)
+        parcel.writeLong(percent)
     }
 
     override fun describeContents(): Int {

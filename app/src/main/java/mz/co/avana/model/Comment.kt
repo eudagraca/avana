@@ -3,17 +3,19 @@ package mz.co.avana.model
 import android.os.Parcel
 import android.os.Parcelable
 
-data class Comment(val userID: String, val text: String, val date: String) : Parcelable {
+data class Comment(val userID: String, val text: String, val date: Long, val user: String) : Parcelable {
     constructor(parcel: Parcel) : this(
-            parcel.readString()!!,
-            parcel.readString()!!,
-            parcel.readString()!!) {
-    }
+        parcel.readString()!!,
+        parcel.readString()!!,
+        parcel.readLong(),
+        parcel.readString()!!
+    )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(userID)
         parcel.writeString(text)
-        parcel.writeString(date)
+        parcel.writeLong(date)
+        parcel.writeString(user)
     }
 
     override fun describeContents(): Int {

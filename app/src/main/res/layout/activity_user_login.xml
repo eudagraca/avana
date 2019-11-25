@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/rl_user_login"
     tools:context=".presentation.ui.user.UserLoginActivity">
 
     <ScrollView
@@ -13,6 +14,7 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
+        android:scrollIndicators="none"
         android:layout_alignParentBottom="true">
 
 
@@ -31,20 +33,21 @@
 
                 <ImageView
                     android:id="@+id/logo"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="100dp"
+                    android:layout_height="120dp"
                     android:layout_gravity="center"
-                    android:layout_marginTop="70dp"
-                    android:src="@mipmap/ic_launcher_round" />
+                    android:layout_marginTop="30dp"
+                    android:src="@drawable/ic_avana_logo_withe" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
-                    android:layout_marginTop="30dp"
                     android:layout_marginEnd="25dp"
                     android:layout_marginBottom="30dp"
+                    android:fontFamily="@font/work_sans_light"
                     android:text="@string/login"
+                    android:textAllCaps="true"
                     android:textColor="@color/md_white_1000"
                     android:textSize="18sp" />
 
@@ -70,7 +73,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/email"
-                        android:maxLines="1"
+                        android:inputType="textEmailAddress"
                     />
 
 
@@ -98,7 +101,7 @@
 
 
                 <TextView
-                    android:id="@+id/forotPassword"
+                    android:id="@+id/forgotPassword"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/passwordSignIn"
@@ -112,14 +115,16 @@
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/signIn"
-                    style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
-                    android:layout_width="match_parent"
+                        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                        app:cornerRadius="18dp"
+                        app:strokeColor="@color/colorPrimary"
+                        app:strokeWidth="1dp"                        android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/forotPassword"
+                    android:layout_below="@id/forgotPassword"
                     android:layout_marginTop="12dp"
                     android:background="@drawable/gradient_buttom"
                     android:padding="15dp"
-                    android:text="@string/login"
+                    android:text="@string/login_user"
                     android:textAlignment="center"
                     android:textAllCaps="false" />
 

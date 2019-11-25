@@ -7,14 +7,13 @@ import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.google.android.material.chip.Chip
 import mz.co.avana.R
 import mz.co.avana.model.Item
 import mz.co.avana.model.Likes
-import mz.co.avana.repository.likes.LikedCallback
+import mz.co.avana.callbacks.LikedCallback
 import mz.co.avana.repository.likes.LikesRepository
 
 class ItemMostLikedAdapter(
@@ -67,7 +66,7 @@ class ItemMostLikedAdapter(
                 onItemClickListener.invoke(item)
             }
 
-            likesR.likedOrNot(item.itemId!!, object: LikedCallback{
+            likesR.likedOrNot(item.itemId!!, object: LikedCallback {
                 override fun likes(isLiked: Boolean) {
                     if (isLiked){
                         likes!!.setImageDrawable(
@@ -82,7 +81,7 @@ class ItemMostLikedAdapter(
 
             likes!!.setOnClickListener {
                 val likesRep = LikesRepository(like, context)
-                likesRep.setLike(item.itemId!!, object: LikedCallback{
+                likesRep.setLike(item.itemId!!, object: LikedCallback {
                     override fun likes(isLiked: Boolean) {
                         if (isLiked){
                             likes!!.setImageDrawable(

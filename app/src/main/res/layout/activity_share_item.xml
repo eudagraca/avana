@@ -9,6 +9,13 @@
     <include layout="@layout/form_item" />
 
     <!-- Bottom Sheet Content -->
-    <include layout="@layout/bootom_sheet_categories" />
+    <com.github.ybq.android.spinkit.SpinKitView xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/spin_kit"
+        style="@style/SpinKitView.Circle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        app:SpinKit_Color="@color/colorAccent" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

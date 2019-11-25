@@ -1,7 +1,100 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="120dp"
+    android:layout_height="150dp"
+    android:layout_margin="5dp"
+    android:clipChildren="false"
+    app:cardCornerRadius="10dp"
+    app:cardElevation="1dp"
+    app:cardPreventCornerOverlap="false">
 
-</LinearLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/itemID"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone" />
+
+        <ImageView
+            android:id="@+id/ivItem"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="0dp"
+            android:baselineAlignBottom="true"
+            android:scaleType="matrix"
+            android:src="@drawable/ic_launcher_background" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/tvLocation"
+            style="@style/Widget.MaterialComponents.Chip.Choice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/md_white_1000"
+            android:fontFamily="@font/work_sans_light"
+            android:gravity="top|start"
+            android:padding="10dp"
+            android:textColor="@color/md_grey_700"
+            android:textSize="10sp"
+            android:textStyle="bold"
+            app:chipIcon="@drawable/ic_map_symbol"
+            tools:text="Maxixe" />
+
+        <RelativeLayout
+            android:id="@+id/value"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/ivItem"
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="0dp"
+            android:background="@color/md_grey_50"
+            android:orientation="horizontal"
+            android:padding="10dp">
+
+            <TextView
+                android:id="@+id/tvNome"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/work_sans_medium"
+                android:maxLines="1"
+                android:textAllCaps="true"
+                android:textSize="14sp"
+                tools:text="Sacola" />
+
+            <TextView
+                android:id="@+id/tvPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvNome"
+                android:fontFamily="@font/work_sans_light"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                tools:text="500MZN" />
+
+            <ImageButton
+                android:id="@+id/ivLikes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignRight="@id/tvPrice"
+                android:layout_alignBottom="@+id/tvPrice"
+                android:layout_alignParentEnd="true"
+                android:layout_marginBottom="0dp"
+                android:background="@color/md_grey_50"
+                android:gravity="center"
+                android:padding="10dp"
+                android:src="@drawable/ic_heart_simple"
+                android:textSize="18sp" />
+
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+</com.google.android.material.card.MaterialCardView>
