@@ -41,10 +41,7 @@ import mz.co.avana.utils.Utils
 import mz.co.avana.viewModel.item.ItemViewModel
 import mz.co.avana.viewModel.user.UserViewModel
 
-class UserProfile : Fragment(), MessageCallback, SwipeRefreshLayout.OnRefreshListener {
-    override fun onRefresh() {
-        userData()
-    }
+class UserProfile : Fragment(), MessageCallback {
 
     private val PICK_IMAGE_REQUEST = 101
     private lateinit var mView: View
@@ -76,13 +73,6 @@ class UserProfile : Fragment(), MessageCallback, SwipeRefreshLayout.OnRefreshLis
         mView.edit_name.visibility = View.GONE
         mView.lLisBlank.visibility = View.GONE
         mView.loading.visibility = View.GONE
-        mView.swipeRefresh.setOnRefreshListener(this)
-        mView.swipeRefresh.setColorSchemeColors(
-            ContextCompat.getColor(
-                context!!,
-                R.color.colorAccent
-            )
-        )
 
         dialog = Dialog(context!!)
 
@@ -101,8 +91,6 @@ class UserProfile : Fragment(), MessageCallback, SwipeRefreshLayout.OnRefreshLis
             val email = Utils.readPreference(
                 Constants.EMAIL, Constants.EMAIL, activity!!
             )
-
-            Toast.makeText(context!!, email+" ---", Toast.LENGTH_SHORT).show()
 
             val promotions = Utils.readPreference(
                 Constants.PROMOTION, Constants.PROMOTION, activity!!
@@ -208,7 +196,6 @@ class UserProfile : Fragment(), MessageCallback, SwipeRefreshLayout.OnRefreshLis
                 )
             }
             mView.loading.visibility = View.GONE
-            mView.swipeRefresh.isRefreshing = false
         })
         userViewModel.userData()
     }
