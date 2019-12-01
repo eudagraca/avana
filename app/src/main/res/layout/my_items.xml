@@ -22,28 +22,6 @@
             android:layout_height="wrap_content"
             android:visibility="gone" />
 
-<!--        <TextView-->
-<!--            android:id="@+id/hourText"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_alignParentTop="true"-->
-<!--            tools:text="Publication time: 00:00:00"-->
-<!--            android:layout_marginBottom="10dp"-->
-<!--            android:layout_marginStart="10dp"-->
-<!--                android:layout_marginTop="10dp"-->
-<!--            android:textColor="@color/md_grey_600"/>-->
-
-<!--        <TextView-->
-<!--            android:id="@+id/endOfPromo"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_below="@id/hourText"-->
-<!--            tools:text="End at: 00:00:00"-->
-<!--            android:layout_marginBottom="10dp"-->
-<!--            android:layout_marginTop="0dp"-->
-<!--            android:layout_marginStart="10dp"-->
-<!--            android:textColor="@color/md_grey_600"/>-->
-
         <RelativeLayout
             android:id="@+id/value"
             android:layout_width="wrap_content"
@@ -61,68 +39,47 @@
                 android:scaleType="centerCrop"
                 android:src="@drawable/ic_launcher_background" />
 
-<!--            <TextView-->
-<!--                android:id="@+id/tvNome"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:fontFamily="@font/work_sans_medium"-->
-<!--                android:maxLines="1"-->
-<!--                android:paddingTop="0dp"-->
-<!--                android:textAllCaps="false"-->
-<!--                android:textSize="@dimen/font_size_medium"-->
-<!--                android:layout_marginStart="10dp"-->
-<!--                android:layout_toEndOf="@id/ivItemUser"-->
-<!--                tools:text="Sacola" />-->
-
-<!--            <TextView-->
-<!--                android:id="@+id/tvPrice"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:fontFamily="@font/work_sans_medium"-->
-<!--                android:textColor="@color/colorPrimary"-->
-<!--                android:paddingTop="0dp"-->
-<!--                android:paddingBottom="5dp"-->
-<!--                android:textSize="@dimen/font_size_medium"-->
-<!--                android:maxLines="1"-->
-<!--                android:textStyle="italic|bold"-->
-<!--                tools:text="500MZN"-->
-<!--                android:layout_marginTop="10dp"-->
-<!--                android:layout_below="@+id/tvNome"-->
-<!--                android:layout_alignStart="@+id/tvNome"/>-->
-
-<!--            <com.google.android.material.button.MaterialButton-->
-<!--                android:id="@+id/btn_delete"-->
-<!--                style="@style/Widget.MaterialComponents.Button.OutlinedButton"-->
-<!--                app:cornerRadius="18dp"-->
-<!--                    app:strokeWidth="2dp"-->
-<!--                    app:strokeColor="@color/md_red_A400"-->
-<!--                android:textColor="@color/md_red_A400"                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_below="@id/tvPrice"-->
-<!--                android:layout_marginStart="0dp"-->
-<!--                android:layout_marginEnd="10dp"-->
-<!--                android:text="@string/delete"-->
-<!--                android:padding="10dp"-->
-<!--                android:textAlignment="center"-->
-<!--                android:layout_alignStart="@+id/tvPrice"/>-->
-
-<!--            <com.google.android.material.button.MaterialButton-->
-<!--                android:id="@+id/btn_update"-->
-<!--                style="@style/Widget.MaterialComponents.Button.OutlinedButton"-->
-<!--                app:cornerRadius="18dp"-->
-<!--                    app:strokeWidth="2dp"-->
-<!--                app:strokeColor="@color/md_green_A700"-->
-<!--                android:textColor="@color/md_green_A700"                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_below="@id/btn_delete"-->
-<!--                android:layout_marginStart="0dp"-->
-<!--                android:layout_marginEnd="10dp"-->
-<!--                android:text="@string/update"-->
-<!--                android:padding="10dp"-->
-<!--                android:textAlignment="center"-->
-<!--                android:layout_alignStart="@+id/btn_delete"/>-->
-
         </RelativeLayout>
 
+        <TextView
+            android:id="@+id/tvEyes"
+            android:layout_below="@id/value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2"
+            android:textAlignment="center"
+            android:textColor="@color/md_white_1000"
+            android:textSize="@dimen/font_size_medium"
+            android:layout_marginTop="-50dp"
+            android:layout_marginStart="20dp"
+            android:drawableBottom="@drawable/ic_view" />
+
+        <TextView
+            android:id="@+id/tvchat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/value"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="-50dp"
+            android:layout_toEndOf="@+id/tvEyes"
+            android:drawableBottom="@drawable/ic_chat"
+            android:text="2"
+            android:textAlignment="center"
+            android:textColor="@color/md_white_1000"
+            android:textSize="@dimen/font_size_medium" />
+
+        <TextView
+            android:id="@+id/tvLikes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/value"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="-50dp"
+            android:layout_toEndOf="@+id/tvchat"
+            android:drawableBottom="@drawable/ic_heart_simple"
+            android:text="2"
+            android:textAlignment="center"
+            android:textColor="@color/md_white_1000"
+            android:textSize="@dimen/font_size_medium" />
     </RelativeLayout>
 </com.google.android.material.card.MaterialCardView>
