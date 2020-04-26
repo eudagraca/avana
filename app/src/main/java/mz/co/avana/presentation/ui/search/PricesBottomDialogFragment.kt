@@ -18,7 +18,13 @@ class PricesBottomDialogFragment() : BottomSheetDialogFragment() {
     private var max = ""
     private var item = ""
 
-    constructor(min: String, max: String, name: String, category: String, priceCallback: ItemPriceCallback) : this() {
+    constructor(
+        min: String,
+        max: String,
+        name: String,
+        category: String,
+        priceCallback: ItemPriceCallback
+    ) : this() {
         item = name
         this.min = min
         this.max = max
@@ -27,8 +33,8 @@ class PricesBottomDialogFragment() : BottomSheetDialogFragment() {
     }
 
     override fun onCreateView(
-            inflater: LayoutInflater, container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.bottom_sheet_filter, container, false)
 
@@ -73,18 +79,18 @@ class PricesBottomDialogFragment() : BottomSheetDialogFragment() {
 
     private fun getCategories(view: View) {
         val addPhotoBottomDialogFragment =
-                CategoriesBottomDialogFragment(object : ItemPriceCallback {
-                    override fun values(min: String, max: String, item: String) {
-                    }
+            CategoriesBottomDialogFragment(object : ItemPriceCallback {
+                override fun values(min: String, max: String, item: String) {
+                }
 
-                    override fun categories(name: String, databaseName: String) {
-                        view.select_category.text = name
-                        category = databaseName
-                    }
-                })
+                override fun categories(name: String, databaseName: String) {
+                    view.select_category.text = name
+                    category = databaseName
+                }
+            })
         addPhotoBottomDialogFragment.show(
-                childFragmentManager,
-                "add_photo_dialog_fragment"
+            childFragmentManager,
+            "add_photo_dialog_fragment"
         )
     }
 

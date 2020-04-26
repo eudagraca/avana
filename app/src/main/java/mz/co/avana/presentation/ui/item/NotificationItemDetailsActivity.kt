@@ -1,9 +1,7 @@
 package mz.co.avana.presentation.ui.item
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import kotlinx.android.synthetic.main.activity_notification_item_details.*
+import androidx.appcompat.app.AppCompatActivity
 import mz.co.avana.R
 
 class NotificationItemDetailsActivity : AppCompatActivity() {

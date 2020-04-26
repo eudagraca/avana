@@ -11,7 +11,7 @@ import androidx.fragment.app.DialogFragment
 import kotlinx.android.synthetic.main.dialog.view.*
 import mz.co.avana.R
 
-class CustomDialog(val primay: String, val secondary: String) : DialogFragment(){
+class CustomDialog(val primay: String, val secondary: String) : DialogFragment() {
 
     @SuppressLint("InflateParams")
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
@@ -21,7 +21,10 @@ class CustomDialog(val primay: String, val secondary: String) : DialogFragment()
         val mView = layoutInflaterAndroid.inflate(R.layout.dialog, null)
         builder.setContentView(mView)
         builder.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        builder.window?.setLayout((resources.displayMetrics.widthPixels*0.80).toInt(), LinearLayout.LayoutParams.WRAP_CONTENT)
+        builder.window?.setLayout(
+            (resources.displayMetrics.widthPixels * 0.80).toInt(),
+            LinearLayout.LayoutParams.WRAP_CONTENT
+        )
         mView.tvPrimaryInfo.text = primay
         mView.tvSecondaryInfo.text = secondary
         return builder

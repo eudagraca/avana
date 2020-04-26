@@ -12,8 +12,10 @@ import mz.co.avana.R
 import mz.co.avana.model.Images
 
 
-class ImagesAdapter(private val context: Context, val imagesFiles: ArrayList<Images>,
-                    private val onItemClickListener: (images: Images) -> Unit) : RecyclerView.Adapter<ImagesAdapter.ViewHolder>() {
+class ImagesAdapter(
+    private val context: Context, val imagesFiles: ArrayList<Images>,
+    private val onItemClickListener: (images: Images) -> Unit
+) : RecyclerView.Adapter<ImagesAdapter.ViewHolder>() {
 
 
     override fun getItemCount() = imagesFiles.size
@@ -21,7 +23,7 @@ class ImagesAdapter(private val context: Context, val imagesFiles: ArrayList<Ima
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflater = LayoutInflater.from(context)
         return ViewHolder(
-                inflater.inflate(R.layout.list_pictures, parent, false), context, onItemClickListener
+            inflater.inflate(R.layout.list_pictures, parent, false), context, onItemClickListener
         )
     }
 
@@ -32,9 +34,9 @@ class ImagesAdapter(private val context: Context, val imagesFiles: ArrayList<Ima
     }
 
     class ViewHolder(
-            itemView: View,
-            val context: Context,
-            val onItemClickListener: (images: Images) -> Unit
+        itemView: View,
+        val context: Context,
+        val onItemClickListener: (images: Images) -> Unit
     ) : RecyclerView.ViewHolder(itemView) {
 
         var imageOne: ImageView? = null

@@ -30,16 +30,21 @@ class LikesRepository() {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (setLike) {
                     setLike = if (snapshot.child(itemID).hasChild(UserRepository.user())) {
-                        databaseReferenceLikes.child(itemID).child(UserRepository.user()).removeValue()
+                        databaseReferenceLikes.child(itemID).child(UserRepository.user())
+                            .removeValue()
                         likedCallback.likes(false)
-                        referenceItem.document(itemID).update("likes", snapshot.childrenCount-1).addOnSuccessListener {
-                        }
+                        referenceItem.document(itemID).update("likes", snapshot.childrenCount - 1)
+                            .addOnSuccessListener {
+                            }
                         false
                     } else {
-                        databaseReferenceLikes.child(itemID).child(UserRepository.user()).setValue(true)
+                        databaseReferenceLikes.child(itemID).child(UserRepository.user())
+                            .setValue(true)
                             .addOnSuccessListener {
-                                referenceItem.document(itemID).update("likes", snapshot.childrenCount+1).addOnSuccessListener {
-                                }
+                                referenceItem.document(itemID)
+                                    .update("likes", snapshot.childrenCount + 1)
+                                    .addOnSuccessListener {
+                                    }
                                 likedCallback.likes(true)
                             }
                         false
@@ -63,6 +68,7 @@ class LikesRepository() {
                     }
                 }
             }
+
             override fun onCancelled(p0: DatabaseError) {
             }
         })

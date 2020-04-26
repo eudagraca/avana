@@ -12,11 +12,11 @@ import com.smarteist.autoimageslider.SliderViewAdapter
 import mz.co.avana.R
 
 class SliderAdapter(val context: Context, val images: ArrayList<String>) :
-        SliderViewAdapter<SliderAdapter.SliderAdapterVH>() {
+    SliderViewAdapter<SliderAdapter.SliderAdapterVH>() {
     override fun onCreateViewHolder(parent: ViewGroup?): SliderAdapterVH {
         val inflater = LayoutInflater.from(context)
         return SliderAdapterVH(
-                inflater.inflate(R.layout.image_loader, parent, false), context
+            inflater.inflate(R.layout.image_loader, parent, false), context
         )
     }
 
@@ -37,9 +37,9 @@ class SliderAdapter(val context: Context, val images: ArrayList<String>) :
             val imageView = itemView.findViewById<ImageView>(R.id.iv_auto_image_slider)
 
             Glide.with(context)
-                    .load(image)
-                    .transform(CenterCrop(), RoundedCorners(30))
-                    .into(imageView)
+                .load(image)
+                .transform(CenterCrop(), RoundedCorners(30))
+                .into(imageView)
         }
     }
 

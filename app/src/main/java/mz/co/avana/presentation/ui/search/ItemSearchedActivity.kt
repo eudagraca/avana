@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
 import kotlinx.android.synthetic.main.activity_item_searched.*
@@ -21,6 +22,7 @@ import mz.co.avana.presentation.ui.main.HomeActivity
 import mz.co.avana.utils.Constants
 import mz.co.avana.viewModel.item.ItemViewModel
 
+
 class ItemSearchedActivity : AppCompatActivity() {
     var minPrice: String = ""
     var maxPrice: String = ""
@@ -34,7 +36,9 @@ class ItemSearchedActivity : AppCompatActivity() {
 
         search.isCursorVisible = false
         loading.visibility = View.VISIBLE
-        materialButtonBack.iconTint = getColorStateList(R.color.md_white_1000)
+        materialButtonBack.backgroundTintList =
+            ContextCompat.getColorStateList(baseContext, R.color.md_white_1000)
+
         itemSearched = intent.getStringExtra("item")!!
         search.setText(itemSearched)
         getItems(itemSearched, "", "", "")
@@ -57,20 +61,26 @@ class ItemSearchedActivity : AppCompatActivity() {
 
     private fun setPrices() {
         val addPhotoBottomDialogFragment =
-            PricesBottomDialogFragment(minPrice, maxPrice, search.text.toString(), category!!,  object : ItemPriceCallback {
-                override fun values(min: String, max: String, item: String) {
-                    minPrice = min
-                    maxPrice = max
-                }
+            PricesBottomDialogFragment(
+                minPrice,
+                maxPrice,
+                search.text.toString(),
+                category!!,
+                object : ItemPriceCallback {
+                    override fun values(min: String, max: String, item: String) {
+                        minPrice = min
+                        maxPrice = max
+                    }
 
-                override fun categories(name: String, databaseName: String) {
-                    category = name
-                    getItems(itemSearched, databaseName, minPrice, maxPrice)
-                }
-            })
+                    override fun categories(name: String, databaseName: String) {
+                        category = name
+                        getItems(itemSearched, databaseName, minPrice, maxPrice)
+                    }
+                })
         addPhotoBottomDialogFragment.show(
             supportFragmentManager,
-            "add_photo_dialog_fragment")
+            "add_photo_dialog_fragment"
+        )
     }
 
     @SuppressLint("DefaultLocale")

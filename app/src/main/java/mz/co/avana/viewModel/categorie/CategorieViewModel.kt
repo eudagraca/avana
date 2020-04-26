@@ -2,10 +2,9 @@ package mz.co.avana.viewModel.categorie
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import mz.co.avana.database.FirebaseConfig
 import mz.co.avana.model.Categories
 
-class CategorieViewModel: ViewModel() {
+class CategorieViewModel : ViewModel() {
     val categoriesLiveData: MutableLiveData<List<Categories>> = MutableLiveData()
 //
 //    fun getCategories(){

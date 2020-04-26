@@ -5,7 +5,7 @@ import android.os.Parcelable
 
 data class Categories(val image: Int?, val name: String, val nameOnDatabase: String) : Parcelable {
 
-    constructor(name: String, nameOnDatabase: String): this(
+    constructor(name: String, nameOnDatabase: String) : this(
         image = null,
         name = name,
         nameOnDatabase = nameOnDatabase
@@ -13,9 +13,9 @@ data class Categories(val image: Int?, val name: String, val nameOnDatabase: Str
 
 
     constructor(parcel: Parcel) : this(
-            parcel.readInt(),
-            parcel.readString()!!,
-            parcel.readString()!!
+        parcel.readInt(),
+        parcel.readString()!!,
+        parcel.readString()!!
     )
 
     override fun writeToParcel(dest: Parcel?, flags: Int) {

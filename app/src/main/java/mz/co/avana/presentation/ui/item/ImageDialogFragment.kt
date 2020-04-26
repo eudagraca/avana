@@ -41,6 +41,7 @@ class ImageDialogFragment : DialogFragment(), View.OnClickListener {
             container, false
         )
     }
+
     /*
      * Os acessos as Views estão no método onResume(), pois somente
      * depois de onCreateView() é que podemos utilizar a sintaxe

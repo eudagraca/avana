@@ -12,14 +12,11 @@ import android.view.ViewGroup
 import android.view.Window
 import android.widget.LinearLayout
 import android.widget.TextView
-import android.widget.Toast
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
@@ -243,19 +240,19 @@ class UserProfile : Fragment(), MessageCallback {
     }
 
     private fun pickImage() {
-      val intent = Intent(Intent.ACTION_GET_CONTENT)
-      // Sets the type as image/*. This ensures only components of type image are selected
+        val intent = Intent(Intent.ACTION_GET_CONTENT)
+        // Sets the type as image/*. This ensures only components of type image are selected
         intent.type = "image/*"
         //We pass an extra array with the accepted mime types. This will ensure only components with these MIME types as targeted.
         intent.action = Intent.ACTION_GET_CONTENT
         // Launching the Intent
-       startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST)
+        startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-          if (resultCode == RESULT_OK) {
+        if (resultCode == RESULT_OK) {
             if (requestCode == PICK_IMAGE_REQUEST) {
                 user.image = data!!.data
                 val image = data.data

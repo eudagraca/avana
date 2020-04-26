@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="item"
             type="mz.co.avana.model.Item" />
@@ -94,52 +95,52 @@
                             android:padding="20dp">
 
                             <LinearLayout
-                                    android:id="@+id/ll_photos_container"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_alignParentStart="true"
-                                    android:layout_marginTop="@dimen/default_margin_padding"
+                                android:id="@+id/ll_photos_container"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentStart="true"
+                                android:layout_marginTop="@dimen/default_margin_padding"
                                 android:layout_marginEnd="0dp"
                                 android:layout_toStartOf="@+id/likesDetails"
-                                    android:orientation="horizontal"
+                                android:orientation="horizontal"
                                 android:padding="6dp">
 
                                 <com.makeramen.roundedimageview.RoundedImageView
-                                        android:id="@+id/iv_img_thumb_01"
-                                        style="@style/AppTheme.DetailsRoundedImageView"
-                                        android:layout_marginEnd="5dp"
-                                        app:imageUrl="@{item.images[0]}"
-                                        app:riv_border_color="@android:color/transparent"
-                                        app:riv_border_width="2dp"
-                                        app:riv_corner_radius="5dp"
-                                        app:riv_mutate_background="true"
-                                        app:riv_oval="false"
-                                        app:riv_tile_mode="clamp"/>
+                                    android:id="@+id/iv_img_thumb_01"
+                                    style="@style/AppTheme.DetailsRoundedImageView"
+                                    android:layout_marginEnd="5dp"
+                                    app:imageUrl="@{item.images[0]}"
+                                    app:riv_border_color="@android:color/transparent"
+                                    app:riv_border_width="2dp"
+                                    app:riv_corner_radius="5dp"
+                                    app:riv_mutate_background="true"
+                                    app:riv_oval="false"
+                                    app:riv_tile_mode="clamp" />
 
                                 <com.makeramen.roundedimageview.RoundedImageView
-                                        android:id="@+id/iv_img_thumb_02"
-                                        style="@style/AppTheme.DetailsRoundedImageView"
-                                        android:layout_marginEnd="5dp"
-                                        android:layout_marginRight="5dp"
-                                        app:imageUrl="@{item.images[1]}"
-                                        app:riv_border_color="@android:color/transparent"
-                                        app:riv_border_width="2dp"
-                                        app:riv_corner_radius="5dp"
-                                        app:riv_mutate_background="true"
-                                        app:riv_oval="false"
-                                        app:riv_tile_mode="clamp"/>
+                                    android:id="@+id/iv_img_thumb_02"
+                                    style="@style/AppTheme.DetailsRoundedImageView"
+                                    android:layout_marginEnd="5dp"
+                                    android:layout_marginRight="5dp"
+                                    app:imageUrl="@{item.images[1]}"
+                                    app:riv_border_color="@android:color/transparent"
+                                    app:riv_border_width="2dp"
+                                    app:riv_corner_radius="5dp"
+                                    app:riv_mutate_background="true"
+                                    app:riv_oval="false"
+                                    app:riv_tile_mode="clamp" />
 
                                 <com.makeramen.roundedimageview.RoundedImageView
-                                        android:id="@+id/iv_img_thumb_03"
-                                        style="@style/AppTheme.DetailsRoundedImageView"
-                                        android:layout_marginEnd="5dp"
-                                        app:imageUrl="@{item.images[2]}"
-                                        app:riv_border_color="@android:color/transparent"
-                                        app:riv_border_width="2dp"
-                                        app:riv_corner_radius="5dp"
-                                        app:riv_mutate_background="true"
-                                        app:riv_oval="false"
-                                        app:riv_tile_mode="clamp"/>
+                                    android:id="@+id/iv_img_thumb_03"
+                                    style="@style/AppTheme.DetailsRoundedImageView"
+                                    android:layout_marginEnd="5dp"
+                                    app:imageUrl="@{item.images[2]}"
+                                    app:riv_border_color="@android:color/transparent"
+                                    app:riv_border_width="2dp"
+                                    app:riv_corner_radius="5dp"
+                                    app:riv_mutate_background="true"
+                                    app:riv_oval="false"
+                                    app:riv_tile_mode="clamp" />
                             </LinearLayout>
 
 
@@ -164,11 +165,11 @@
                                     android:id="@+id/normalPriceDetails"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:fontFamily="@font/work_sans_light"
                                     android:gravity="center"
                                     android:text="@{String.format(@string/show_old_price,Double.toString(item.normalPrice))}"
                                     android:textColor="@color/md_grey_500"
-                                    android:textSize="@dimen/font_size_medium"
-                                        android:fontFamily="@font/work_sans_light"/>
+                                    android:textSize="@dimen/font_size_medium" />
 
                             </LinearLayout>
 
@@ -243,6 +244,7 @@
                                     android:id="@+id/storeDetails"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:layout_marginTop="10dp"
                                     android:drawableEnd="@drawable/ic_shop"
                                     android:drawablePadding="@dimen/default_margin_padding"
                                     android:ellipsize="end"
@@ -250,11 +252,10 @@
                                     android:gravity="center"
                                     android:maxLines="1"
                                     android:singleLine="true"
-                                    android:layout_marginTop="10dp"
-                                    android:textSize="@dimen/font_size_small"
                                     android:text="@{item.store}"
                                     android:textAlignment="gravity"
                                     android:textColor="@color/colorPrimaryDark"
+                                    android:textSize="@dimen/font_size_small"
                                     android:textStyle="italic" />
                             </LinearLayout>
 
@@ -283,38 +284,39 @@
                                 android:textSize="16sp" />
 
                             <TextView
-                                    android:id="@+id/feedBackText"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginTop="20dp"
-                                    android:textStyle="italic"
-                                    android:layout_below="@id/descriptionDetails"
-                                    android:fontFamily="@font/work_sans_light"
-                                    android:text="@string/how_about_this_info"
-                                    android:textAlignment="gravity"
-                                    android:textColor="@color/md_grey_800"
-                                    android:textSize="@dimen/font_size_medium" />
+                                android:id="@+id/feedBackText"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@id/descriptionDetails"
+                                android:layout_marginTop="20dp"
+                                android:layout_marginBottom="10dp"
+                                android:fontFamily="@font/work_sans_light"
+                                android:text="@string/how_about_this_info"
+                                android:textAlignment="gravity"
+                                android:textColor="@color/md_grey_800"
+                                android:textSize="@dimen/font_size_medium"
+                                android:textStyle="italic" />
 
-                            <ImageButton
-                                    android:id="@+id/ivPositive"
-                                    android:layout_width="36dp"
-                                    android:layout_height="36dp"
-                                    android:layout_below="@+id/feedBackText"
-                                    android:src="@drawable/ic_positive_vote"
-                                    android:gravity="center"
-                                    android:layout_alignParentStart="true"
-                                    android:background="@color/md_white_1000"/>
+                            <ImageView
+                                android:id="@+id/ivPositive"
+                                android:layout_width="32dp"
+                                android:layout_height="32dp"
+                                android:layout_below="@+id/feedBackText"
+                                android:layout_alignParentStart="true"
+                                android:background="@color/md_white_1000"
+                                android:gravity="center"
+                                android:src="@drawable/ic_positive_vote" />
 
-                            <ImageButton
-                                    android:id="@+id/ivNegative"
-                                    android:layout_width="36dp"
-                                    android:layout_height="36dp"
-                                    android:layout_below="@+id/feedBackText"
-                                    android:src="@drawable/ic_negative_vote"
-                                    android:gravity="center"
-                                    android:layout_marginStart="20dp"
-                                    android:layout_toEndOf="@id/ivPositive"
-                                    android:background="@color/md_white_1000"/>
+                            <ImageView
+                                android:id="@+id/ivNegative"
+                                android:layout_width="32dp"
+                                android:layout_height="32dp"
+                                android:layout_below="@+id/feedBackText"
+                                android:layout_marginStart="50dp"
+                                android:layout_toEndOf="@id/ivPositive"
+                                android:background="@color/md_white_1000"
+                                android:gravity="center"
+                                android:src="@drawable/ic_negative_vote" />
 
                         </RelativeLayout>
 
@@ -486,10 +488,10 @@
                         android:layout_marginStart="0dp"
                         android:layout_marginTop="0dp"
                         android:layout_marginEnd="0dp"
-                            app:counterMaxLength="200"
                         android:layout_toStartOf="@+id/tv_send_comment"
                         android:backgroundTint="@color/md_grey_100"
-                        android:outlineProvider="none">
+                        android:outlineProvider="none"
+                        app:counterMaxLength="200">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:layout_width="match_parent"

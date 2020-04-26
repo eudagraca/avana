@@ -18,9 +18,19 @@ import mz.co.avana.utils.Constants
 import mz.co.avana.utils.Utils
 import java.util.*
 
-class ItemRepository(val context: Context?, val item: Item?, val images: ArrayList<Uri>?, val activity: Activity?) {
+class ItemRepository(
+    val context: Context?,
+    val item: Item?,
+    val images: ArrayList<Uri>?,
+    val activity: Activity?
+) {
 
-    constructor(context: Context) : this(context = null, item = null, images = null, activity = null)
+    constructor(context: Context) : this(
+        context = null,
+        item = null,
+        images = null,
+        activity = null
+    )
 
     var imagesLink = arrayListOf<String>()
     val reference = FirebaseConfig.firebaseFirestore().collection(Constants.ITEM)
@@ -38,7 +48,8 @@ class ItemRepository(val context: Context?, val item: Item?, val images: ArrayLi
         )
         reference.add(item!!).addOnSuccessListener { documentReference ->
             FirebaseConfig.firebaseFirestore().collection(Constants.USER)
-                .document(UserRepository.user()).update("posts", posts.toLong() + 1).addOnSuccessListener {
+                .document(UserRepository.user()).update("posts", posts.toLong() + 1)
+                .addOnSuccessListener {
 
                     Utils.writeSharedPreferences(
                         Constants.POSTS,
@@ -60,16 +71,18 @@ class ItemRepository(val context: Context?, val item: Item?, val images: ArrayLi
                                 imagesLink[2]
                             )
                             imgLink["imagesLink"] = listOf(*imgBackup)
-                            reference.document(documentReference.id).update(map).addOnCompleteListener { task ->
-                                if (task.isSuccessful) {
-                                    reference.document(documentReference.id).update(imgLink).addOnCompleteListener {
-                                        messageSuccess = "Item shared successful"
+                            reference.document(documentReference.id).update(map)
+                                .addOnCompleteListener { task ->
+                                    if (task.isSuccessful) {
+                                        reference.document(documentReference.id).update(imgLink)
+                                            .addOnCompleteListener {
+                                                messageSuccess = "Item shared successful"
+                                            }
+                                    } else {
+                                        reference.document(documentReference.id).delete()
+                                        messageError = "Failed to share"
                                     }
-                                } else {
-                                    reference.document(documentReference.id).delete()
-                                    messageError = "Failed to share"
-                                }
-                            }.addOnFailureListener {
+                                }.addOnFailureListener {
                                 reference.document(documentReference.id).delete()
                             }
                             if (messageSuccess.isNotEmpty() && messageSuccess != "" && messageSuccess.isNotBlank()) {
@@ -106,15 +119,17 @@ class ItemRepository(val context: Context?, val item: Item?, val images: ArrayLi
             "store" to item.store
         )
 
-        item.itemId?.let { itemId->
+        item.itemId?.let { itemId ->
             reference.document(itemId).update(itemData).addOnSuccessListener {
                 FirebaseConfig.firebaseFirestore().collection(Constants.USER)
-                    .document(UserRepository.user()).update("posts", posts.toLong() + 1).addOnSuccessListener {
+                    .document(UserRepository.user()).update("posts", posts.toLong() + 1)
+                    .addOnSuccessListener {
 
                         Utils.writeSharedPreferences(
                             Constants.POSTS,
                             (posts.toLong() + 1).toString(), Constants.POSTS,
-                            activity )
+                            activity
+                        )
 
                         updateItemImage(object : OnUploadImageCallback {
                             override fun onUpload(images: Images) {
@@ -130,16 +145,18 @@ class ItemRepository(val context: Context?, val item: Item?, val images: ArrayLi
                                     imagesLink[2]
                                 )
                                 imgLink["imagesLink"] = listOf(*imgBackup)
-                                reference.document(itemId).update(map).addOnCompleteListener { task ->
-                                    if (task.isSuccessful) {
-                                        reference.document(itemId).update(imgLink).addOnCompleteListener {
-                                            messageSuccess = "Item shared successful"
+                                reference.document(itemId).update(map)
+                                    .addOnCompleteListener { task ->
+                                        if (task.isSuccessful) {
+                                            reference.document(itemId).update(imgLink)
+                                                .addOnCompleteListener {
+                                                    messageSuccess = "Item shared successful"
+                                                }
+                                        } else {
+                                            reference.document(itemId).delete()
+                                            messageError = "Failed to share"
                                         }
-                                    } else {
-                                        reference.document(itemId).delete()
-                                        messageError = "Failed to share"
-                                    }
-                                }.addOnFailureListener {
+                                    }.addOnFailureListener {
                                     reference.document(itemId).delete()
                                 }
                                 if (messageSuccess.isNotEmpty() && messageSuccess != "" && messageSuccess.isNotBlank()) {
@@ -193,7 +210,11 @@ class ItemRepository(val context: Context?, val item: Item?, val images: ArrayLi
                 }.addOnFailureListener {
                 }
             } else {
-                Toast.makeText(context, context!!.getString(R.string.please_upload_photo), Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    context,
+                    context!!.getString(R.string.please_upload_photo),
+                    Toast.LENGTH_SHORT
+                ).show()
             }
         }
     }
@@ -210,7 +231,7 @@ class ItemRepository(val context: Context?, val item: Item?, val images: ArrayLi
 
                 ref.delete().addOnSuccessListener {
                     i++
-                    if (i==3) {
+                    if (i == 3) {
                         for (image in images!!) {
                             if (image.toString().isNotEmpty()) {
                                 singleImage = item.userID + "/" + UUID.randomUUID().toString()
@@ -221,7 +242,7 @@ class ItemRepository(val context: Context?, val item: Item?, val images: ArrayLi
                                 val uploadTask = refer.putFile(image)
                                 uploadTask.continueWithTask(Continuation<UploadTask.TaskSnapshot, Task<Uri>> { task ->
                                     if (!task.isSuccessful) {
-                                        task.exception?.let {ex->
+                                        task.exception?.let { ex ->
                                             throw ex
                                         }
                                     }
@@ -245,7 +266,11 @@ class ItemRepository(val context: Context?, val item: Item?, val images: ArrayLi
                                 }.addOnFailureListener {
                                 }
                             } else {
-                                Toast.makeText(context, context!!.getString(R.string.please_upload_photo), Toast.LENGTH_SHORT).show()
+                                Toast.makeText(
+                                    context,
+                                    context!!.getString(R.string.please_upload_photo),
+                                    Toast.LENGTH_SHORT
+                                ).show()
                             }
                         }
                     }
@@ -268,7 +293,7 @@ class ItemRepository(val context: Context?, val item: Item?, val images: ArrayLi
                     .child(Constants.COMMENTS)
                 ref.delete().addOnSuccessListener {
                     i++
-                    if (i==3) {
+                    if (i == 3) {
                         reference.document(itemId).delete().addOnSuccessListener {
                             refDataBaseLikes.child(itemId).removeValue()
                             refDataBaseComment.child(itemId).removeValue()

@@ -14,7 +14,8 @@ import mz.co.avana.utils.Utils
 class CommentsAdapter(private val commentList: List<Comment>, val context: Context) :
     RecyclerView.Adapter<CommentsAdapter.ItemViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.list_comments, parent, false)
+        val view =
+            LayoutInflater.from(parent.context).inflate(R.layout.list_comments, parent, false)
         return ItemViewHolder(view, context)
     }
 
@@ -25,7 +26,8 @@ class CommentsAdapter(private val commentList: List<Comment>, val context: Conte
         holder.bindViews(comment)
     }
 
-    class ItemViewHolder(itemView: View, private val context: Context) : RecyclerView.ViewHolder(itemView) {
+    class ItemViewHolder(itemView: View, private val context: Context) :
+        RecyclerView.ViewHolder(itemView) {
         private var name: TextView? = null
         private var text: TextView? = null
         private var date: TextView? = null
@@ -39,7 +41,8 @@ class CommentsAdapter(private val commentList: List<Comment>, val context: Conte
 
         fun bindViews(comment: Comment) {
             text!!.text = comment.text
-            date!!.text = context.getString(R.string.days_ago, Utils.deferenceBetweenDates(comment.date))
+            date!!.text =
+                context.getString(R.string.days_ago, Utils.deferenceBetweenDates(comment.date))
             name!!.text = comment.user
 
 //            itemView.setOnClickListener {

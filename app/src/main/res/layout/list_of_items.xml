@@ -7,7 +7,7 @@
     android:layout_margin="5dp"
     android:clipChildren="false"
     app:cardCornerRadius="15dp"
-    app:cardElevation="0.9dp"
+    app:cardElevation="1dp"
     app:cardPreventCornerOverlap="false">
 
     <RelativeLayout
@@ -22,16 +22,16 @@
             android:visibility="gone" />
 
         <ImageView
-                android:id="@+id/ivItem"
-                android:layout_width="match_parent"
-                android:layout_height="150dp"
-                android:layout_alignParentTop="true"
-                android:layout_marginTop="0dp"
-                android:baselineAlignBottom="true"
-                android:background="@drawable/corner_default"
-                android:scaleType="centerCrop"
-                android:src="@drawable/ic_launcher_background"
-                android:contentDescription="@string/item_image"/>
+            android:id="@+id/ivItem"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="0dp"
+            android:background="@drawable/corner_default"
+            android:baselineAlignBottom="true"
+            android:contentDescription="@string/item_image"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_launcher_background" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/tvLocation"
@@ -39,18 +39,18 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:fontFamily="@font/work_sans_light"
-            android:layout_marginTop="0dp"
-            android:gravity="top|start"
             android:layout_margin="0dp"
-            android:padding="10dp"
-            app:chipIconEnabled="false"
+            android:layout_marginTop="0dp"
             android:background="@color/md_green_600"
             android:backgroundTint="@color/md_green_600"
-            android:textStyle="bold"
-            app:chipIcon="@drawable/ic_map_symbol"
+            android:fontFamily="@font/work_sans_light"
+            android:gravity="top|start"
+            android:padding="10dp"
             android:textColor="@color/md_white_1000"
             android:textSize="12sp"
+            android:textStyle="bold"
+            app:chipIcon="@drawable/ic_map_symbol"
+            app:chipIconEnabled="false"
             tools:text="Maxixe" />
 
         <RelativeLayout
@@ -67,19 +67,18 @@
                 android:id="@+id/tvPrice"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/work_sans_medium"
                 android:layout_below="@+id/tvNome"
                 android:layout_alignParentStart="true"
-                android:textAllCaps="true"
                 android:layout_marginStart="0dp"
                 android:layout_marginTop="10dp"
                 android:ellipsize="end"
+                android:fontFamily="@font/montserrat"
                 android:maxLines="1"
                 android:paddingBottom="5dp"
                 android:singleLine="true"
+                android:textAllCaps="true"
                 android:textColor="@color/colorPrimary"
-                android:textSize="@dimen/font_size_small"
-                android:textStyle="italic|bold"
+                android:textSize="@dimen/font_size_medium"
                 tools:text="500MZN" />
 
             <TextView
@@ -99,17 +98,17 @@
                 tools:text="Sacola" />
 
             <ImageButton
-                    android:id="@+id/ivLikes"
-                    android:layout_width="36dp"
-                    android:layout_height="36dp"
-                    android:layout_below="@+id/tvPrice"
-                    android:src="@drawable/ic_heart_simple"
-                    android:gravity="center"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginTop="-20dp"
-                    android:layout_marginBottom="-10dp"
-                    android:background="@color/md_white_1000"
-                    android:contentDescription="@string/like_item"/>
+                android:id="@+id/ivLikes"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_below="@+id/tvPrice"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="-20dp"
+                android:layout_marginBottom="-10dp"
+                android:background="@color/md_white_1000"
+                android:contentDescription="@string/like_item"
+                android:gravity="center"
+                android:src="@drawable/ic_heart_simple" />
 
 
         </RelativeLayout>

@@ -119,7 +119,7 @@ class UserRepository(val context: Context, val user: User, val activity: Activit
 
     fun setToken(messageCallback: MessageCallback) {
         FirebaseConfig.firebaseFirestore().collection(Constants.USER)
-            .document(user()).update("token", user.token).addOnCompleteListener{
+            .document(user()).update("token", user.token).addOnCompleteListener {
                 messageCallback.onSuccess(context.getString(R.string.welcome))
             }
     }
@@ -127,7 +127,8 @@ class UserRepository(val context: Context, val user: User, val activity: Activit
     @SuppressLint("DefaultLocale")
     fun setLocation(messageCallback: MessageCallback) {
         FirebaseConfig.firebaseFirestore().collection(Constants.USER)
-            .document(user()).update("location", user.location.toLowerCase()).addOnCompleteListener{
+            .document(user()).update("location", user.location.toLowerCase())
+            .addOnCompleteListener {
                 messageCallback.onSuccess(user.location)
             }
     }
@@ -140,7 +141,7 @@ class UserRepository(val context: Context, val user: User, val activity: Activit
         fun user() = FirebaseConfig.instanceOfAuth().currentUser!!.uid
         fun email() = FirebaseConfig.instanceOfAuth().currentUser!!.email
 
-        fun logOut(){
+        fun logOut() {
             FirebaseConfig.firebaseFirestore().collection(Constants.USER)
                 .document(user()).update("token", FieldValue.delete()).addOnSuccessListener {
                     FirebaseConfig.instanceOfAuth().signOut()

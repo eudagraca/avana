@@ -27,8 +27,10 @@ class FetchAddressTask() : AsyncTask<Location, Void, String>() {
 
     override fun doInBackground(vararg params: Location): String {
         // Set up the geoCoder
-        val geoCoder = Geocoder(mContext,
-                Locale.getDefault())
+        val geoCoder = Geocoder(
+            mContext,
+            Locale.getDefault()
+        )
 
         // Get the passed in location
         val location = params[0]
@@ -36,12 +38,14 @@ class FetchAddressTask() : AsyncTask<Location, Void, String>() {
         var resultMessage = ""
 
         try {
-            if(params.isNotEmpty()){
+            Log.i("LOCALIZACAO", location.latitude.toString())
+            if (params.isNotEmpty()) {
                 addresses = geoCoder.getFromLocation(
                     location.latitude,
                     location.longitude,
                     // Get a single address
-                    2)
+                    2
+                )
             }
 
         } catch (ioException: IOException) {
@@ -50,7 +54,10 @@ class FetchAddressTask() : AsyncTask<Location, Void, String>() {
         } catch (illegalArgumentException: IllegalArgumentException) {
             // Catch invalid latitude or longitude values
             resultMessage = ""
-            Message.messageToast(mContext, mContext.resources.getString(R.string.location_not_found))
+            Message.messageToast(
+                mContext,
+                mContext.resources.getString(R.string.location_not_found)
+            )
         }
 
         // If no addresses found, print an error message.
@@ -69,11 +76,13 @@ class FetchAddressTask() : AsyncTask<Location, Void, String>() {
                 addressParts.add(address.locality)
             }
             resultMessage = TextUtils.join(
-                    "\n",
-                    addressParts)
+                "\n",
+                addressParts
+            )
         }
         return resultMessage
     }
+
     /**
      * Called once the background thread is finished and updates the
      * UI with the result.

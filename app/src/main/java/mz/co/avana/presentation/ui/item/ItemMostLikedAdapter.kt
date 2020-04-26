@@ -11,9 +11,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.google.android.material.chip.Chip
 import mz.co.avana.R
+import mz.co.avana.callbacks.LikedCallback
 import mz.co.avana.model.Item
 import mz.co.avana.model.Likes
-import mz.co.avana.callbacks.LikedCallback
 import mz.co.avana.repository.likes.LikesRepository
 
 class ItemMostLikedAdapter(
@@ -22,7 +22,8 @@ class ItemMostLikedAdapter(
 ) : RecyclerView.Adapter<ItemMostLikedAdapter.ItemViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
 
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.list_item_most_liked, parent, false)
+        val view = LayoutInflater.from(parent.context)
+            .inflate(R.layout.list_item_most_liked, parent, false)
 
         return ItemViewHolder(view, context, onItemClickListener)
     }
@@ -58,7 +59,10 @@ class ItemMostLikedAdapter(
         fun bindViews(item: Item) {
             val like = Likes(item.itemId!!, 0)
             name!!.text = item.name
-            price!!.text = String.format(context.resources.getString(R.string.show_new_price), item.currentPrice)
+            price!!.text = String.format(
+                context.resources.getString(R.string.show_new_price),
+                item.currentPrice
+            )
             Glide.with(context).load(item.images!![0]).into(this.image!!)
             location!!.text = item.location
 
@@ -66,14 +70,16 @@ class ItemMostLikedAdapter(
                 onItemClickListener.invoke(item)
             }
 
-            likesR.likedOrNot(item.itemId!!, object: LikedCallback {
+            likesR.likedOrNot(item.itemId!!, object : LikedCallback {
                 override fun likes(isLiked: Boolean) {
-                    if (isLiked){
+                    if (isLiked) {
                         likes!!.setImageDrawable(
-                            context.getDrawable(R.drawable.ic_heart_liked))
-                    }else{
+                            context.getDrawable(R.drawable.ic_heart_liked)
+                        )
+                    } else {
                         likes!!.setImageDrawable(
-                            context.getDrawable(R.drawable.ic_heart_simple))
+                            context.getDrawable(R.drawable.ic_heart_simple)
+                        )
                     }
                 }
 
@@ -81,14 +87,16 @@ class ItemMostLikedAdapter(
 
             likes!!.setOnClickListener {
                 val likesRep = LikesRepository(like, context)
-                likesRep.setLike(item.itemId!!, object: LikedCallback {
+                likesRep.setLike(item.itemId!!, object : LikedCallback {
                     override fun likes(isLiked: Boolean) {
-                        if (isLiked){
+                        if (isLiked) {
                             likes!!.setImageDrawable(
-                                context.getDrawable(R.drawable.ic_heart_liked))
-                        }else{
+                                context.getDrawable(R.drawable.ic_heart_liked)
+                            )
+                        } else {
                             likes!!.setImageDrawable(
-                                context.getDrawable(R.drawable.ic_heart_simple))
+                                context.getDrawable(R.drawable.ic_heart_simple)
+                            )
                         }
                     }
                 })

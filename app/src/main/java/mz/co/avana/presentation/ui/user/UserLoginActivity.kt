@@ -2,7 +2,6 @@ package mz.co.avana.presentation.ui.user
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.iid.FirebaseInstanceId
 import kotlinx.android.synthetic.main.activity_user_login.*
@@ -61,7 +60,11 @@ class UserLoginActivity : AppCompatActivity() {
 
                                     override fun onError(errorMessage: String) {
                                         loader!!.dismissAllowingStateLoss()
-                                        Message.snackbarMessage(baseContext, rl_user_login, errorMessage)
+                                        Message.snackbarMessage(
+                                            baseContext,
+                                            rl_user_login,
+                                            errorMessage
+                                        )
                                     }
                                 })
                             }
@@ -128,7 +131,7 @@ class UserLoginActivity : AppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
-        if (loader!!.isVisible){
+        if (loader!!.isVisible) {
             loader!!.dismissAllowingStateLoss()
         }
     }

@@ -1,11 +1,9 @@
 package mz.co.avana.presentation.ui.user
 
 import android.os.Bundle
-import com.google.android.material.snackbar.Snackbar
-import androidx.appcompat.app.AppCompatActivity;
-import mz.co.avana.R
-
+import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_other_user_profile.*
+import mz.co.avana.R
 
 class OtherUserProfileActivity : AppCompatActivity() {
 

@@ -31,24 +31,29 @@ class EditUserNameDialog(val messageCallback: MessageCallback) : DialogFragment(
         val mView = layoutInflaterAndroid.inflate(R.layout.dialog_edit_user_name, null)
         builder.setContentView(mView)
         builder.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        builder.window?.setLayout((resources.displayMetrics.widthPixels*0.80).toInt(), LinearLayout.LayoutParams.WRAP_CONTENT)
+        builder.window?.setLayout(
+            (resources.displayMetrics.widthPixels * 0.80).toInt(),
+            LinearLayout.LayoutParams.WRAP_CONTENT
+        )
         val name = Utils.readPreference(
             Constants.NAMES_OF_USER,
             Constants.NAMES_OF_USER,
-            activity!!)
+            activity!!
+        )
 
-        val surname =  Utils.readPreference(
+        val surname = Utils.readPreference(
             Constants.SURNAME,
             Constants.SURNAME,
-            activity!!)
+            activity!!
+        )
 
         mView.edit_name_update.editText!!.setText(name)
         mView.edit_surname_update.editText!!.setText(surname)
 
         mView.btn_update_names.setOnClickListener {
 
-            if(getInput(mView)) {
-                if(builder.isShowing){
+            if (getInput(mView)) {
+                if (builder.isShowing) {
                     builder.dismiss()
                 }
                 val repository = UserRepository(context!!, user, activity!!)

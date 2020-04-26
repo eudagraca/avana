@@ -6,7 +6,6 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.provider.Settings
-import android.util.Log
 import android.view.MenuItem
 import android.view.Window
 import android.widget.LinearLayout
@@ -61,26 +60,26 @@ class HomeActivity : AppCompatActivity() {
                 }
                 R.id.profile -> {
 
-                    if(UserRepository.isLogged()) {
+                    if (UserRepository.isLogged()) {
                         val myProfile = UserProfile()
                         val bundle = Bundle()
                         bundle.putString("fragment", "profile")
                         myProfile.arguments = bundle
                         loadFragment(myProfile, fl, supportFragmentManager)
-                    }else{
+                    } else {
                         alertLogin!!.show(supportFragmentManager, "milses")
                     }
                     true
                 }
                 R.id.newItem -> {
-                    if(UserRepository.isLogged()) {
-                    startActivity(Intent(this@HomeActivity, ShareItemActivity::class.java))
-                    }else{
+                    if (UserRepository.isLogged()) {
+                        startActivity(Intent(this@HomeActivity, ShareItemActivity::class.java))
+                    } else {
                         alertLogin!!.show(supportFragmentManager, "milses")
                     }
                     true
                 }
-                R.id.others ->{
+                R.id.others -> {
                     val othersFragment = OthersFragment()
                     loadFragment(othersFragment, fl, supportFragmentManager)
                     true

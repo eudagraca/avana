@@ -11,7 +11,7 @@ class LocationManagerCheck() {
     private var providerType = 0
     private var mContext: Activity? = null
 
-    constructor(context: Activity):this(){
+    constructor(context: Activity) : this() {
         mContext = context
         locationManager = context
             .getSystemService(Context.LOCATION_SERVICE) as LocationManager

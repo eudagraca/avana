@@ -176,5 +176,6 @@
     <string name="upload_images_in_png_jpg_or_jpeg_">Upload images in PNG, JPG or JPEG format!</string>
     <string name="actives">Actives</string>
     <string name="products_i_posted">Products I posted</string>
+    <string name="my_city">My City</string>
 
 </resources>

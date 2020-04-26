@@ -18,7 +18,7 @@ class OthersFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val view =  inflater.inflate(R.layout.fragment_others, container, false)
+        val view = inflater.inflate(R.layout.fragment_others, container, false)
 
         return view
     }

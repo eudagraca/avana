@@ -9,18 +9,15 @@ import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
-import com.bumptech.glide.request.RequestOptions
-import com.google.android.libraries.places.widget.AutocompleteSupportFragment
 import com.google.android.material.chip.Chip
 import mz.co.avana.R
+import mz.co.avana.callbacks.LikedCallback
 import mz.co.avana.model.Item
 import mz.co.avana.model.Likes
-import mz.co.avana.callbacks.LikedCallback
 import mz.co.avana.presentation.ui.dialog.CustomDialogAlertLogin
 import mz.co.avana.repository.likes.LikesRepository
 import mz.co.avana.repository.user.UserRepository
@@ -109,12 +106,10 @@ class ItemAdapter(
                                 likes!!.setImageDrawable(
                                     context.getDrawable(R.drawable.ic_heart_liked)
                                 )
-                                Message.messageToast(context, "+1")
                             } else {
                                 likes!!.setImageDrawable(
                                     context.getDrawable(R.drawable.ic_heart_simple)
                                 )
-                                Message.messageToast(context, "-1")
                             }
                         }
                     })

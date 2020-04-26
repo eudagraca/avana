@@ -2,8 +2,6 @@ package mz.co.avana.model
 
 import android.os.Parcel
 import android.os.Parcelable
-import com.google.firebase.Timestamp
-import mz.co.avana.database.FirebaseConfig
 
 class Item(
     var name: String,
@@ -76,6 +74,7 @@ class Item(
         percent = (((currentPrice - normalPrice) / normalPrice) * 100).toLong(),
         createdAt = System.currentTimeMillis()
     )
+
     constructor(
         name: String,
         location: String,

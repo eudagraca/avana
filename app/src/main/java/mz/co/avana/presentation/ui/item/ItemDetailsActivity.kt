@@ -43,6 +43,7 @@ class ItemDetailsActivity : AppCompatActivity() {
     private var shareActionProvider: ShareActionProvider? = null
     lateinit var item: Item
     lateinit var binding: ActivityItemDetailsBinding
+    var args: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,7 +52,7 @@ class ItemDetailsActivity : AppCompatActivity() {
             this, R.layout.activity_item_details
         )
 
-        val args = intent.getStringExtra("fragment")
+         args = intent.getStringExtra("fragment")
 
         btnBack.setOnClickListener {
             if (args != null) {
@@ -68,10 +69,11 @@ class ItemDetailsActivity : AppCompatActivity() {
 
         intent!!.let {
             item = intent.extras!!.getParcelable<Item>(Constants.ITEM) as Item
-            
+
             end_promo_details.text = Utils.toNormalDate(item.date)
             //Put style of TextView
-            normalPriceDetails.paintFlags = normalPriceDetails.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
+            normalPriceDetails.paintFlags =
+                normalPriceDetails.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
 
             val adapter = SliderAdapter(this, item.images!!)
             imageSlider.sliderAdapter = adapter
@@ -138,42 +140,42 @@ class ItemDetailsActivity : AppCompatActivity() {
             Constants.USER,
             this@ItemDetailsActivity
         )
-       if (UserRepository.isLogged()){
-           if (isValidInput()){
-               val comment = Comment(
-                   UserRepository.user(),
-                   til_comment.editText!!.text.toString(),
-                   System.currentTimeMillis(),
-                   user
-               )
-               val repository = CommentRepository(comment, baseContext)
-               item.itemId?.let {
-                   repository.commentAnItem(it, object : MessageCallback {
-                       override fun onSuccess(successMessage: String) {
-                           til_comment.editText!!.clearFocus()
-                           til_comment.editText!!.text.clear()
-                           Message.snackbarMessage(baseContext, binding.root, successMessage)
-                           loadComments()
-                       }
+        if (UserRepository.isLogged()) {
+            if (isValidInput()) {
+                val comment = Comment(
+                    UserRepository.user(),
+                    til_comment.editText!!.text.toString(),
+                    System.currentTimeMillis(),
+                    user
+                )
+                val repository = CommentRepository(comment, baseContext)
+                item.itemId?.let {
+                    repository.commentAnItem(it, object : MessageCallback {
+                        override fun onSuccess(successMessage: String) {
+                            til_comment.editText!!.clearFocus()
+                            til_comment.editText!!.text.clear()
+                            Message.snackbarMessage(baseContext, binding.root, successMessage)
+                            loadComments()
+                        }
 
-                       override fun onError(errorMessage: String) {
-                           Message.snackbarMessage(baseContext, binding.root, errorMessage)
-                       }
-                   })
-               }
-           }
-       }else{
-           alertLogin.show(supportFragmentManager, "milses")
-       }
+                        override fun onError(errorMessage: String) {
+                            Message.snackbarMessage(baseContext, binding.root, errorMessage)
+                        }
+                    })
+                }
+            }
+        } else {
+            alertLogin.show(supportFragmentManager, "milses")
+        }
     }
 
-    private fun isValidInput(): Boolean{
+    private fun isValidInput(): Boolean {
         val valid: Boolean
-        if (til_comment.editText!!.text.isNotEmpty() || til_comment.editText!!.text.toString() != ""){
+        if (til_comment.editText!!.text.isNotEmpty() || til_comment.editText!!.text.toString() != "") {
             til_comment.isErrorEnabled = false
             til_comment.clearFocus()
             valid = true
-        }else{
+        } else {
             til_comment.isErrorEnabled = true
             til_comment.error = getString(R.string.comment_required)
             til_comment.requestFocus()
@@ -219,5 +221,17 @@ class ItemDetailsActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
 //        loadComments()
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        if (args != null) {
+            val intent = Intent(this@ItemDetailsActivity, HomeActivity::class.java)
+            intent.putExtra("fragment", args)
+            startActivity(intent)
+        } else {
+            onBackPressed()
+        }
+        finish()
     }
 }

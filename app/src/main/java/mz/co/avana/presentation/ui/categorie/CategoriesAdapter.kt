@@ -14,12 +14,14 @@ import mz.co.avana.model.Categories
 import mz.co.avana.utils.Utils
 
 
-class CategoriesAdapter(private val categoriesList: List<Categories>, val context: Context,
-                        private val onItemClickListener: (categories: Categories) -> Unit)
-    : RecyclerView.Adapter<CategoriesAdapter.ItemViewHolder>() {
+class CategoriesAdapter(
+    private val categoriesList: List<Categories>, val context: Context,
+    private val onItemClickListener: (categories: Categories) -> Unit
+) : RecyclerView.Adapter<CategoriesAdapter.ItemViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
 
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.list_category, parent, false)
+        val view =
+            LayoutInflater.from(parent.context).inflate(R.layout.list_category, parent, false)
 
         return ItemViewHolder(view, context, onItemClickListener)
     }
@@ -31,8 +33,10 @@ class CategoriesAdapter(private val categoriesList: List<Categories>, val contex
         holder.bindViews(categories)
     }
 
-    class ItemViewHolder(itemView: View, private val context: Context,
-                         private val onItemClickListener: ((categories: Categories) -> Unit)) : RecyclerView.ViewHolder(itemView) {
+    class ItemViewHolder(
+        itemView: View, private val context: Context,
+        private val onItemClickListener: ((categories: Categories) -> Unit)
+    ) : RecyclerView.ViewHolder(itemView) {
         private var name: TextView? = null
         private var image: ImageView? = null
 
@@ -43,11 +47,13 @@ class CategoriesAdapter(private val categoriesList: List<Categories>, val contex
 
         fun bindViews(categories: Categories) {
             name!!.text = categories.name
-            Glide.with(context).
-                load(context.getDrawable(categories.image!!))
+            Glide.with(context).load(context.getDrawable(categories.image!!))
                 .apply(
-                    RequestOptions.overrideOf(Utils.getScreenWidth()/6
-                    , Utils.getScreenHeight()/4))
+                    RequestOptions.overrideOf(
+                        Utils.getScreenWidth() / 6
+                        , Utils.getScreenHeight() / 4
+                    )
+                )
                 .into(this.image!!)
 
             itemView.setOnClickListener {

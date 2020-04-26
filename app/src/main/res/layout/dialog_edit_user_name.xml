@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
     android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:background="@drawable/corner_default"
-    android:layout_height="match_parent">
+    android:orientation="vertical">
 
     <RelativeLayout
         android:id="@+id/rl1"
@@ -19,9 +19,9 @@
             android:layout_height="150dp"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="20dp"
+            android:contentDescription="@string/logo"
             android:minWidth="100dp"
             android:minHeight="100dp"
-            android:contentDescription="@string/logo"
             android:src="@drawable/ic_avana_logo_withe" />
 
 
@@ -30,8 +30,8 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/logo"
             android:layout_alignParentEnd="true"
-            android:layout_marginEnd="10dp"
             android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
             android:layout_marginBottom="10dp"
             android:fontFamily="@font/work_sans_medium"
             android:text="@string/edit_your_names"
@@ -81,26 +81,25 @@
     </LinearLayout>
 
     <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:orientation="horizontal">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_update_names_cancel"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:orientation="horizontal"
-    >
+            android:layout_marginEnd="30dp"
+            android:text="@string/cancel" />
 
         <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_update_names_cancel"
-                style="@style/Widget.MaterialComponents.Button.TextButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="30dp"
-        android:text="@string/cancel"/>
-
-        <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_update_names"
-                style="@style/Widget.MaterialComponents.Button.TextButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/update"/>
+            android:id="@+id/btn_update_names"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/update" />
 
     </LinearLayout>
 

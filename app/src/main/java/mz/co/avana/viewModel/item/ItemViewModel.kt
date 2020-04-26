@@ -11,10 +11,6 @@ import mz.co.avana.database.FirebaseConfig
 import mz.co.avana.model.Item
 import mz.co.avana.repository.user.UserRepository
 import mz.co.avana.utils.Constants
-import java.text.SimpleDateFormat
-import java.util.*
-import java.util.concurrent.TimeUnit
-import kotlin.collections.ArrayList
 
 
 @Suppress("UNCHECKED_CAST")

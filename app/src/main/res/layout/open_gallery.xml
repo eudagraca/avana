@@ -1,42 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/corner_default"
+    android:orientation="vertical"
+    android:padding="15dp">
+
+    <TextView
+        android:id="@+id/tvicon"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:background="@drawable/corner_default"
-        android:padding="15dp"
-        android:orientation="vertical">
+        android:layout_alignParentTop="true"
+        android:layout_gravity="start"
+        android:layout_marginStart="20dp"
+        android:layout_marginBottom="10dp"
+        android:drawableStart="@drawable/ic_warning" />
 
     <TextView
-            android:id="@+id/tvicon"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            android:layout_marginStart="20dp"
-            android:layout_marginBottom="10dp"
-            android:layout_alignParentTop="true"
-            android:drawableStart="@drawable/ic_warning"/>
-
-    <TextView
-            android:id="@+id/tv_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/tvicon"
-            android:text="@string/select_image_prof"
-            android:textSize="@dimen/font_size_small"/>
+        android:id="@+id/tv_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvicon"
+        android:text="@string/select_image_prof"
+        android:textSize="@dimen/font_size_small" />
 
     <com.google.android.material.button.MaterialButton
-            android:id="@+id/openGalley"
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_gravity="center"
-            android:layout_below="@id/tv_text"
-            android:layout_marginTop="10dp"
-            android:text="@string/gallery"
-            android:textColor="@color/colorPrimary"
-            app:cornerRadius="18dp"
-            app:strokeColor="@color/colorPrimary" />
+        android:id="@+id/openGalley"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_text"
+        android:layout_alignParentEnd="true"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:text="@string/gallery"
+        android:textColor="@color/colorPrimary"
+        app:cornerRadius="18dp"
+        app:strokeColor="@color/colorPrimary" />
 
 </RelativeLayout>

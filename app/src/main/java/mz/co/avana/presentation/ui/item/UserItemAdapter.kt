@@ -12,18 +12,16 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.developer.kalert.KAlertDialog
-import com.google.android.material.button.MaterialButton
 import mz.co.avana.R
 import mz.co.avana.callbacks.MessageCallback
 import mz.co.avana.model.Item
 import mz.co.avana.repository.item.ItemRepository
 import mz.co.avana.utils.Constants
 import mz.co.avana.utils.Message
-import mz.co.avana.utils.Utils
 
 class UserItemAdapter(
-        private val itemList: List<Item>, val context: Context,
-        private val onItemClickListener: (item: Item) -> Unit
+    private val itemList: List<Item>, val context: Context,
+    private val onItemClickListener: (item: Item) -> Unit
 ) : RecyclerView.Adapter<UserItemAdapter.ItemViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
 
@@ -40,17 +38,17 @@ class UserItemAdapter(
     }
 
     class ItemViewHolder(
-            itemView: View,
-            private val context: Context,
-            private val onItemClickListener: (item: Item) -> Unit
+        itemView: View,
+        private val context: Context,
+        private val onItemClickListener: (item: Item) -> Unit
     ) : RecyclerView.ViewHolder(itemView) {
-//        private var name: TextView? = null
+        //        private var name: TextView? = null
 //        private var price: TextView? = null
         private var image: ImageView? = null
 //        private var endAt: TextView? = null
 //        private var createdAt: TextView? = null
-//        private var delete: MaterialButton? = null
-//        private var update: MaterialButton? = null
+        private var delete: TextView? = null
+        private var update: TextView? = null
 
         init {
 //            name = itemView.findViewById(R.id.tvNome)
@@ -58,8 +56,8 @@ class UserItemAdapter(
             image = itemView.findViewById(R.id.ivItemUser)
 //            endAt = itemView.findViewById(R.id.endOfPromo)
 //            createdAt = itemView.findViewById(R.id.hourText)
-//            delete = itemView.findViewById(R.id.btn_delete)
-//            update = itemView.findViewById(R.id.btn_update)
+            delete = itemView.findViewById(R.id.tv_delete)
+            update = itemView.findViewById(R.id.tv_update)
         }
 
         fun bindViews(item: Item) {
@@ -81,55 +79,55 @@ class UserItemAdapter(
             itemView.setOnClickListener {
                 onItemClickListener.invoke(item)
             }
-//            val itemRepository = ItemRepository(context)
+            val itemRepository = ItemRepository(context)
 //
-//            delete!!.setOnClickListener {
-//                KAlertDialog(context, KAlertDialog.WARNING_TYPE)
-//                        .setTitleText(context.getString(R.string.are_you_sure))
-//                        .setContentText(context.getString(R.string.wont_be_able_to_recover_this_file))
-//                        .setConfirmText(context.getString(R.string.yes_delete_it))
-//                        .setConfirmClickListener {
-//                            it.dismissWithAnimation()
-//                            Message.messageToast(context, "Deleting ${item.name}")
-//                            itemRepository.deleteItem(item.itemId!!, object : MessageCallback {
-//                                override fun onSuccess(successMessage: String) {
-//                                    Message.messageToast(context, successMessage)
-//                                }
-//
-//                                override fun onError(errorMessage: String) {
-//                                    it.dismissWithAnimation()
-//                                    Message.messageToast(context, errorMessage)
-//                                }
-//                            })
-//                        }
-//                        .cancelButtonColor(R.drawable.alert_button_cancel)
-//                        .setCancelText(context.getString(R.string.no_cancel))
-//                        .setCancelClickListener { sDialog ->
-//                            sDialog.dismissWithAnimation()
-//                        }.show()
-//            }
-//
-//            update!!.setOnClickListener {
-//                KAlertDialog(context, KAlertDialog.WARNING_TYPE)
-//                        .setTitleText(context.getString(R.string.are_you_sure))
-//                        .setContentText(context.getString(R.string.edit_this_item))
-//                        .confirmButtonColor(R.drawable.alert_button_positive)
-//                        .setConfirmText(context.getString(R.string.yes_delete_it))
-//                        .cancelButtonColor(R.drawable.alert_button_cancel)
-//                        .setConfirmText(context.getString(R.string.yes_change_it))
-//                        .setCancelText(context.getString(R.string.no_cancel))
-//                        .setConfirmClickListener { sDialog ->
-//                            sDialog.dismissWithAnimation()
-//
-//                            val intent = Intent(context, UpdateItemActivity::class.java)
-//                            intent.putExtra(Constants.ITEM, item)
-//                            intent.putExtra("fragment", "profile")
-//                            context.startActivity(intent)
-//                        }
-//                        .setCancelClickListener { sDialog ->
-//                            sDialog.dismissWithAnimation()
-//                        }.show()
-//            }
+            delete!!.setOnClickListener {
+                KAlertDialog(context, KAlertDialog.WARNING_TYPE)
+                        .setTitleText(context.getString(R.string.are_you_sure))
+                        .setContentText(context.getString(R.string.wont_be_able_to_recover_this_file))
+                        .setConfirmText(context.getString(R.string.yes_delete_it))
+                        .setConfirmClickListener {
+                            it.dismissWithAnimation()
+                            Message.messageToast(context, "Deleting ${item.name}")
+                            itemRepository.deleteItem(item.itemId!!, object : MessageCallback {
+                                override fun onSuccess(successMessage: String) {
+                                    Message.messageToast(context, successMessage)
+                                }
+
+                                override fun onError(errorMessage: String) {
+                                    it.dismissWithAnimation()
+                                    Message.messageToast(context, errorMessage)
+                                }
+                            })
+                        }
+                        .cancelButtonColor(R.drawable.alert_button_cancel)
+                        .setCancelText(context.getString(R.string.no_cancel))
+                        .setCancelClickListener { sDialog ->
+                            sDialog.dismissWithAnimation()
+                        }.show()
+            }
+
+            update!!.setOnClickListener {
+                KAlertDialog(context, KAlertDialog.WARNING_TYPE)
+                        .setTitleText(context.getString(R.string.are_you_sure))
+                        .setContentText(context.getString(R.string.edit_this_item))
+                        .confirmButtonColor(R.drawable.alert_button_positive)
+                        .setConfirmText(context.getString(R.string.yes_delete_it))
+                        .cancelButtonColor(R.drawable.alert_button_cancel)
+                        .setConfirmText(context.getString(R.string.yes_change_it))
+                        .setCancelText(context.getString(R.string.no_cancel))
+                        .setConfirmClickListener { sDialog ->
+                            sDialog.dismissWithAnimation()
+
+                            val intent = Intent(context, UpdateItemActivity::class.java)
+                            intent.putExtra(Constants.ITEM, item)
+                            intent.putExtra("fragment", "profile")
+                            context.startActivity(intent)
+                        }
+                        .setCancelClickListener { sDialog ->
+                            sDialog.dismissWithAnimation()
+                        }.show()
+            }
         }
     }
 }

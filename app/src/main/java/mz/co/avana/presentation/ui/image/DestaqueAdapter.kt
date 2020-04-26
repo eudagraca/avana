@@ -11,7 +11,11 @@ import com.smarteist.autoimageslider.SliderViewAdapter
 import mz.co.avana.R
 import mz.co.avana.model.Destaque
 
-class DestaqueAdapter(val context: Context, val images: ArrayList<Destaque>, private val itemClickListener: (destaque: Destaque)-> Unit) :
+class DestaqueAdapter(
+    val context: Context,
+    val images: ArrayList<Destaque>,
+    private val itemClickListener: (destaque: Destaque) -> Unit
+) :
     SliderViewAdapter<DestaqueAdapter.DestaqueAdapterVH>() {
     override fun onCreateViewHolder(parent: ViewGroup?): DestaqueAdapterVH {
         val inflater = LayoutInflater.from(context)

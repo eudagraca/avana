@@ -52,9 +52,12 @@ class UserRegistrationActivity : AppCompatActivity() {
                         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
                         dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
                         dialog.setContentView(R.layout.open_gallery)
-                        val  text =  dialog.findViewById<TextView>(R.id.tv_text)
+                        val text = dialog.findViewById<TextView>(R.id.tv_text)
                         text.text = getString(R.string.email_inbox)
-                        dialog.window?.setLayout((resources.displayMetrics.widthPixels*0.90).toInt(), LinearLayout.LayoutParams.WRAP_CONTENT)
+                        dialog.window?.setLayout(
+                            (resources.displayMetrics.widthPixels * 0.90).toInt(),
+                            LinearLayout.LayoutParams.WRAP_CONTENT
+                        )
                         val okButton = dialog.findViewById<TextView>(R.id.openGalley)
                         okButton.text = getString(R.string.dialog_ok)
                         okButton.setOnClickListener {
@@ -88,7 +91,8 @@ class UserRegistrationActivity : AppCompatActivity() {
                 nameSigup.clearFocus()
                 surnameSignup.error = getString(R.string.surnames_required)
                 surnameSignup.requestFocus()
-            }  validateLength(surnameSignup) -> {
+            }
+            validateLength(surnameSignup) -> {
                 nameSigup.isErrorEnabled = false
                 nameSigup.clearFocus()
                 surnameSignup.error = getString(R.string.invalid_surname)
@@ -129,14 +133,15 @@ class UserRegistrationActivity : AppCompatActivity() {
         return isValid
     }
 
-    private fun clearInputs(){
+    private fun clearInputs() {
         nameSigup.editText!!.text = null
         surnameSignup.editText!!.text = null
         passwordSignUp.editText!!.text = null
         emailSignup.editText!!.text = null
     }
-    private fun openLogin(){
-        if (UserRepository.isLogged()){
+
+    private fun openLogin() {
+        if (UserRepository.isLogged()) {
             UserRepository.logOut()
         }
         startActivity(Intent(this, UserLoginActivity::class.java))

@@ -10,9 +10,10 @@ class Validator {
         fun validateEmail(email: String): Boolean {
             return EMAIL_REGEX.toRegex().matches(email)
         }
+
         fun validate(input: TextInputLayout) = input.editText!!.text.isEmpty()
         fun validateLength(input: TextInputLayout) = input.editText!!.text.toString().length < 3
         fun validatePrice(input: TextInputLayout) = input.editText!!.text.toString().toDouble() < 0
-        fun  validatePassword(input: TextInputLayout) = input.editText!!.text.toString().length < 6
+        fun validatePassword(input: TextInputLayout) = input.editText!!.text.toString().length < 6
     }
 }

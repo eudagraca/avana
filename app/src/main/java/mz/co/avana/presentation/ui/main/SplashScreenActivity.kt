@@ -1,6 +1,7 @@
 package mz.co.avana.presentation.ui.main
 
 import android.Manifest
+import android.Manifest.permission.ACCESS_COARSE_LOCATION
 import android.Manifest.permission.ACCESS_FINE_LOCATION
 import android.annotation.SuppressLint
 import android.app.Dialog
@@ -14,12 +15,11 @@ import android.os.Handler
 import android.provider.Settings
 import android.view.Window
 import android.widget.LinearLayout
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
-import com.google.android.gms.common.api.GoogleApiClient
 import com.google.android.gms.location.*
 import com.google.android.material.button.MaterialButton
+import com.google.firebase.analytics.FirebaseAnalytics
 import com.karumi.dexter.Dexter
 import com.karumi.dexter.MultiplePermissionsReport
 import com.karumi.dexter.PermissionToken
@@ -27,10 +27,6 @@ import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 import kotlinx.android.synthetic.main.activity_splash_screen.*
 import mz.co.avana.R
-import mz.co.avana.callbacks.MessageCallback
-import mz.co.avana.model.User
-import mz.co.avana.presentation.ui.user.UserLoginActivity
-import mz.co.avana.repository.user.UserRepository
 import mz.co.avana.services.FetchAddressTask
 import mz.co.avana.services.LocationManagerCheck
 import mz.co.avana.utils.Constants
@@ -40,8 +36,11 @@ import kotlin.system.exitProcess
 
 class SplashScreenActivity : AppCompatActivity(), FetchAddressTask.OnTaskCompleted {
     private var locationManagerCheck: LocationManagerCheck? = null
+
     //Controller to prevent app crash
     private var controller = 0
+
+    private lateinit var firebaseAnalytics: FirebaseAnalytics
 
     // Location classes
     private var mTrackingLocation: Boolean = false
@@ -52,13 +51,15 @@ class SplashScreenActivity : AppCompatActivity(), FetchAddressTask.OnTaskComplet
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash_screen)
-
+// Obtain the FirebaseAnalytics instance.
+        firebaseAnalytics = FirebaseAnalytics.getInstance(this)
         // Initialize the FusedLocationClient.
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
         // Restore the state if the activity is recreated.
         if (savedInstanceState != null) {
             mTrackingLocation = savedInstanceState.getBoolean(
-                Constants.LOCATION_KEY)
+                Constants.LOCATION_KEY
+            )
         }
 
         // Initialize the location callbacks.
@@ -76,6 +77,64 @@ class SplashScreenActivity : AppCompatActivity(), FetchAddressTask.OnTaskComplet
                 }
             }
         }
+
+        controller += 1
+        locationManagerCheck = LocationManagerCheck(this)
+        Dexter.withActivity(this@SplashScreenActivity)
+            .withPermissions(
+                Manifest.permission.CAMERA,
+                ACCESS_FINE_LOCATION,
+                ACCESS_COARSE_LOCATION,
+                Manifest.permission.READ_EXTERNAL_STORAGE
+            ).withListener(object : MultiplePermissionsListener {
+                @SuppressLint("MissingPermission")
+                override fun onPermissionsChecked(report: MultiplePermissionsReport) {
+                    if (report.areAllPermissionsGranted()) {
+
+                        nextScreen()
+                        val alert = Dialog(this@SplashScreenActivity)
+                        if (locationManagerCheck!!.isLocationServiceAvailable()!!) {
+                            alert.dismiss()
+                            startTrackingLocation()
+                            getLocation()
+                        } else {
+                            alert.requestWindowFeature(Window.FEATURE_NO_TITLE)
+                            alert.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+                            alert.window?.setLayout(
+                                (resources.displayMetrics.widthPixels * 0.80).toInt(),
+                                LinearLayout.LayoutParams.WRAP_CONTENT
+                            )
+                            alert.setContentView(R.layout.need_active_resource)
+
+                            val no = alert.findViewById<MaterialButton>(R.id.dont_enable_gps)
+                            no.setOnClickListener {
+                                handler()
+                            }
+
+                            val yes = alert.findViewById<MaterialButton>(R.id.enable_gps)
+                            yes.setOnClickListener {
+                                if (alert.isShowing) {
+                                    controller = 0
+                                    alert.dismiss()
+                                }
+                                startActivity(Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS))
+                            }
+                            if (controller == 1) {
+                                alert.show()
+                            }
+                        }
+                    } else {
+                        exitProcess(0)
+                    }
+                }
+
+                override fun onPermissionRationaleShouldBeShown(
+                    permissions: MutableList<PermissionRequest>?,
+                    token: PermissionToken?
+                ) {
+                    token?.continuePermissionRequest()
+                }
+            }).withErrorListener { }.check()
     }
 
     /**
@@ -85,11 +144,13 @@ class SplashScreenActivity : AppCompatActivity(), FetchAddressTask.OnTaskComplet
      * animation.
      */
     private fun startTrackingLocation() {
-        if (ActivityCompat.checkSelfPermission(this,ACCESS_FINE_LOCATION)
-            != PackageManager.PERMISSION_GRANTED) {
+        if (ActivityCompat.checkSelfPermission(this, ACCESS_FINE_LOCATION)
+            != PackageManager.PERMISSION_GRANTED
+        ) {
             ActivityCompat.requestPermissions(
-                this, arrayOf(ACCESS_FINE_LOCATION),
-                Constants.LOCATION_PERMISSION)
+                this, arrayOf(ACCESS_FINE_LOCATION, ACCESS_COARSE_LOCATION),
+                Constants.LOCATION_PERMISSION
+            )
         } else {
             mTrackingLocation = true
             mFusedLocationClient!!.requestLocationUpdates(
@@ -101,6 +162,7 @@ class SplashScreenActivity : AppCompatActivity(), FetchAddressTask.OnTaskComplet
             // returned
         }
     }
+
     /**
      * Sets up the location request.
      *
@@ -122,62 +184,6 @@ class SplashScreenActivity : AppCompatActivity(), FetchAddressTask.OnTaskComplet
         super.onSaveInstanceState(outState)
     }
 
-    override fun onStart() {
-        super.onStart()
-
-        controller +=1
-        locationManagerCheck = LocationManagerCheck(this)
-        Dexter.withActivity(this@SplashScreenActivity)
-            .withPermissions(
-                Manifest.permission.CAMERA,
-                ACCESS_FINE_LOCATION,
-                Manifest.permission.READ_EXTERNAL_STORAGE
-            ).withListener(object : MultiplePermissionsListener {
-                @SuppressLint("MissingPermission")
-                override fun onPermissionsChecked(report: MultiplePermissionsReport) {
-                    if (report.areAllPermissionsGranted()) {
-                        val alert = Dialog(this@SplashScreenActivity)
-                        if (locationManagerCheck!!.isLocationServiceAvailable()!!) {
-                            alert.dismiss()
-                            startTrackingLocation()
-                            getLocation()
-                        } else {
-                            alert.requestWindowFeature(Window.FEATURE_NO_TITLE)
-                            alert.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-                            alert.window?.setLayout((resources.displayMetrics.widthPixels*0.80).toInt(), LinearLayout.LayoutParams.WRAP_CONTENT)
-                            alert.setContentView(R.layout.need_active_resource)
-
-                            val no = alert.findViewById<MaterialButton>(R.id.dont_enable_gps)
-                            no.setOnClickListener {
-                                handler()
-                            }
-
-                            val yes = alert.findViewById<MaterialButton>(R.id.enable_gps)
-                            yes.setOnClickListener {
-                                if (alert.isShowing){
-                                    controller = 0
-                                    alert.dismiss()
-                                }
-                                startActivity(Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS))
-                            }
-                            if (controller==1){
-                                alert.show()
-                            }
-                        }
-                    } else {
-                        exitProcess(0)
-                    }
-                }
-
-                override fun onPermissionRationaleShouldBeShown(
-                    permissions: MutableList<PermissionRequest>?,
-                    token: PermissionToken?
-                ) {
-                    token?.continuePermissionRequest()
-                }
-            }).withErrorListener { }.check()
-    }
-
     override fun onTaskCompleted(result: String) {
         if (mTrackingLocation) {
             val location = Utils.readPreference(
@@ -189,7 +195,8 @@ class SplashScreenActivity : AppCompatActivity(), FetchAddressTask.OnTaskComplet
                 Utils.writeSharedPreferences(
                     Constants.USER_LOCATION_CITY,
                     result, Constants.LOCATION,
-                    this@SplashScreenActivity)
+                    this@SplashScreenActivity
+                )
             }
 
             val finalLocation = Utils.readPreference(
@@ -220,7 +227,7 @@ class SplashScreenActivity : AppCompatActivity(), FetchAddressTask.OnTaskComplet
 
     private fun handler() {
         val handle = Handler()
-        handle.postDelayed(this::nextScreen, 3000)
+        handle.postDelayed(this::nextScreen, 4000)
     }
 
     override fun onResume() {
@@ -236,15 +243,16 @@ class SplashScreenActivity : AppCompatActivity(), FetchAddressTask.OnTaskComplet
 //            startActivity(intent)
 //            finish()
 //        } else {
-            val intent = Intent(this, HomeActivity::class.java)
-            startActivity(intent)
-            finish()
+        val intent = Intent(this, HomeActivity::class.java)
+        startActivity(intent)
+        finish()
 //        }
     }
 
     private fun getLocation() {
         if (ActivityCompat.checkSelfPermission(this, ACCESS_FINE_LOCATION)
-            != PackageManager.PERMISSION_GRANTED) {
+            != PackageManager.PERMISSION_GRANTED
+        ) {
             ActivityCompat.requestPermissions(
                 this, arrayOf(ACCESS_FINE_LOCATION),
                 Constants.LOCATION_PERMISSION

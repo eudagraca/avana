@@ -3,7 +3,8 @@ package mz.co.avana.model
 import android.os.Parcel
 import android.os.Parcelable
 
-data class Comment(val userID: String, val text: String, val date: Long, val user: String) : Parcelable {
+data class Comment(val userID: String, val text: String, val date: Long, val user: String) :
+    Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readString()!!,
         parcel.readString()!!,

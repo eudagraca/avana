@@ -3,29 +3,29 @@
     android:id="@+id/lLisBlank"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:gravity="center"
+    android:orientation="vertical"
     android:padding="20dp">
 
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:contentDescription="@string/empty"
         android:minWidth="60dp"
         android:minHeight="60dp"
-        android:src="@drawable/ic_blank_page"
-        android:contentDescription="@string/empty" />
+        android:src="@drawable/ic_blank_page" />
 
     <TextView
-            android:id="@+id/tv_isBlank"
+        android:id="@+id/tv_isBlank"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
+        android:fontFamily="@font/work_sans_light"
         android:gravity="center"
         android:text="@string/no_item_found"
-        android:fontFamily="@font/work_sans_light"
-        android:textStyle="italic"
         android:textColor="@color/md_grey_700"
-        android:textSize="16sp" />
+        android:textSize="16sp"
+        android:textStyle="italic" />
 
 </LinearLayout>

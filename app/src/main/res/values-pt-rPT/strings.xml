@@ -113,7 +113,7 @@
     <string name="register">Registro</string>
     <string name="register_user">Registar</string>
     <string name="registering">Registrando usuário</string>
-    <string name="reset">recompor</string>
+    <string name="reset">repor</string>
     <string name="reset_password_text">Precisamos do seu e-mail de registro para enviar instruções de redefinição de senha.</string>
     <string name="save">Gravar</string>
     <string name="saúdeebeleza">Saúde e beleza</string>
@@ -158,6 +158,7 @@
     <string name="upload_images_in_png_jpg_or_jpeg_">Carregue imagens em formato PNG, JPG ou JPEG!</string>
     <string name="actives">Activas</string>
     <string name="products_i_posted">Produtos que eu publiquei</string>
+    <string name="my_city">Minha cidade</string>
 
 
 </resources>

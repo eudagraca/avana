@@ -7,8 +7,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import kotlinx.android.synthetic.main.search_bar.*
 import mz.co.avana.R
-import mz.co.avana.utils.Constants
-import mz.co.avana.utils.Utils
 
 class SearchActivity : AppCompatActivity() {
     var oldSearch: String? = null
@@ -23,8 +21,10 @@ class SearchActivity : AppCompatActivity() {
         search.isCursorVisible = true
         search.hint = getString(R.string.what_are_you_look)
 
-        materialButtonBack.setBackgroundColor( ContextCompat.getColor(this, R.color.md_white_1000))
-        materialButtonBack.iconTint = ContextCompat.getColorStateList(baseContext,R.color.md_black_1000)
+        materialButtonBack.setBackgroundColor(ContextCompat.getColor(this, R.color.md_white_1000))
+        materialButtonBack.background = getDrawable(R.drawable.ic_left_arrow)
+        materialButtonBack.backgroundTintList =
+            ContextCompat.getColorStateList(baseContext, R.color.md_black_1000)
         toolbar.setBackgroundColor(ContextCompat.getColor(baseContext, R.color.md_white_1000))
 
         oldSearch = intent.getStringExtra("search")

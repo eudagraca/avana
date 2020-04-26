@@ -77,8 +77,8 @@
                 android:windowSoftInputMode="stateHidden" />
 
         <meta-data
-                android:name="preloaded_fonts"
-                android:resource="@array/preloaded_fonts" />
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
 
         <service
                 android:name=".services.NotificationMessage"

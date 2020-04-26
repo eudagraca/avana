@@ -25,6 +25,7 @@ class NearFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
     override fun onRefresh() {
         getData(this.view!!)
     }
+
     private var cityLocation = String()
 
     override fun onCreateView(
@@ -32,12 +33,18 @@ class NearFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_itens, container, false)
-        cityLocation = Utils.readPreference(Constants.USER_LOCATION_CITY, Constants.LOCATION, activity!!)
+        cityLocation =
+            Utils.readPreference(Constants.USER_LOCATION_CITY, Constants.LOCATION, activity!!)
 
         view!!.loading.visibility = View.VISIBLE
         view.lLisBlank.visibility = View.GONE
         view.swipeRefresh.setOnRefreshListener(this)
-        view.swipeRefresh.setColorSchemeColors(ContextCompat.getColor(context!!, R.color.colorAccent))
+        view.swipeRefresh.setColorSchemeColors(
+            ContextCompat.getColor(
+                context!!,
+                R.color.colorAccent
+            )
+        )
         getData(view)
         return view
     }
@@ -51,7 +58,7 @@ class NearFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
                 layoutManager = GridLayoutManager(context, 2)
                 setHasFixedSize(true)
                 adapter = ItemAdapter(activity as AppCompatActivity, items, context!!) { item ->
-//                    val intent = Intent(activity, NotificationItemDetailsActivity::class.java)
+                    //                    val intent = Intent(activity, NotificationItemDetailsActivity::class.java)
 //                    intent.putExtra("itemId", item.itemId)
 
                     val intent = Intent(activity, ItemDetailsActivity::class.java)
@@ -61,8 +68,9 @@ class NearFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
                 }
                 if (items.isEmpty()) {
                     view.lLisBlank.visibility = View.VISIBLE
-                    view.tv_isBlank.text = context.getString(R.string.there_are_no_item_in_your_city)
-                }else{
+                    view.tv_isBlank.text =
+                        context.getString(R.string.there_are_no_item_in_your_city)
+                } else {
                     view.lLisBlank.visibility = View.GONE
                 }
                 view.loading.visibility = View.GONE

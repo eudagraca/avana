@@ -32,7 +32,10 @@ import mz.co.avana.presentation.ui.main.HomeActivity
 import mz.co.avana.presentation.ui.search.CategoriesBottomDialogFragment
 import mz.co.avana.repository.item.ItemRepository
 import mz.co.avana.repository.user.UserRepository
-import mz.co.avana.utils.*
+import mz.co.avana.utils.Constants
+import mz.co.avana.utils.Message
+import mz.co.avana.utils.Utils
+import mz.co.avana.utils.Validator
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -61,7 +64,7 @@ class UpdateItemActivity : AppCompatActivity() {
             Glide.with(baseContext).load(item.images!![1]).into(imgTwo)
             Glide.with(baseContext).load(item.images!![2]).into(imgThree)
 
-            for (image in item.images!!){
+            for (image in item.images!!) {
                 listOfImages.add(image.toUri())
             }
 
@@ -73,7 +76,8 @@ class UpdateItemActivity : AppCompatActivity() {
             location.editText!!.setText(item.location)
             description.editText!!.setText(item.description)
             category = item.categories
-            selectCategory!!.text = getStringResource(category!!.toLowerCase(), R.string::class.java)
+            selectCategory!!.text =
+                getStringResource(category!!.toLowerCase(), R.string::class.java)
         }
 
         selectCategory!!.setOnClickListener {
@@ -100,8 +104,10 @@ class UpdateItemActivity : AppCompatActivity() {
                     Utils.dateToMills(end_promo.text.toString()),
                     store.editText!!.text.toString(),
                     UserRepository.user(),
-                    item.itemId!! )
-                val itemRepository = ItemRepository(baseContext, item, listOfImages, this@UpdateItemActivity)
+                    item.itemId!!
+                )
+                val itemRepository =
+                    ItemRepository(baseContext, item, listOfImages, this@UpdateItemActivity)
                 itemRepository.updateItemDetails(object : MessageCallback {
                     override fun onSuccess(successMessage: String) {
                         if (successMessage.isNotEmpty() && successMessage.isNotBlank()) {
@@ -219,53 +225,56 @@ class UpdateItemActivity : AppCompatActivity() {
             dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
             dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
             dialog.setContentView(R.layout.open_gallery)
-            dialog.window?.setLayout((resources.displayMetrics.widthPixels*0.80).toInt(), LinearLayout.LayoutParams.WRAP_CONTENT)
+            dialog.window?.setLayout(
+                (resources.displayMetrics.widthPixels * 0.80).toInt(),
+                LinearLayout.LayoutParams.WRAP_CONTENT
+            )
             dialog.findViewById<TextView>(R.id.openGalley).setOnClickListener {
-                    dialog.dismiss()
-                    val kwikPicker = KwikPicker.Builder(
-                        this@UpdateItemActivity,
-                        imageProvider = { imageView, uri ->
-                            if (uri != null){
-                                Glide.with(this@UpdateItemActivity)
-                                    .load(uri)
-                                    .into(imageView)
-                            }
-                        },
-                        onMultiImageSelectedListener = { list: ArrayList<Uri> ->
-                            if (list.size > 0){
-                                for (i in list) {
-                                    when (counter) {
-                                        0 -> imageOne = i
-                                        1 -> imageTwo = i
-                                        2 -> imageThree = i
-                                    }
-                                    counter++
-                                    listOfImages.add(i)
+                dialog.dismiss()
+                val kwikPicker = KwikPicker.Builder(
+                    this@UpdateItemActivity,
+                    imageProvider = { imageView, uri ->
+                        if (uri != null) {
+                            Glide.with(this@UpdateItemActivity)
+                                .load(uri)
+                                .into(imageView)
+                        }
+                    },
+                    onMultiImageSelectedListener = { list: ArrayList<Uri> ->
+                        if (list.size > 0) {
+                            for (i in list) {
+                                when (counter) {
+                                    0 -> imageOne = i
+                                    1 -> imageTwo = i
+                                    2 -> imageThree = i
                                 }
-                                this.list.clear()
-                                this.list.add(Images(imageOne, imageTwo, imageThree))
+                                counter++
+                                listOfImages.add(i)
                             }
+                            this.list.clear()
+                            this.list.add(Images(imageOne, imageTwo, imageThree))
+                        }
 
-                            with(rvPhoto, {
-                                layoutManager = LinearLayoutManager(context)
-                                setHasFixedSize(true)
-                                adapter = ImagesAdapter(context, this@UpdateItemActivity.list) {
-                                    selectImages()
-                                }
-                                if(list.size > 0){
-                                    formimages.visibility = View.GONE
-                                }
-                            })
-                        },
-                        peekHeight = 1600,
-                        showTitle = false,
-                        selectMaxCount = 3,
-                        completeButtonText = getString(R.string.done),
-                        emptySelectionText = "No Selection"
-                    ).create(baseContext)
-                    kwikPicker.show(supportFragmentManager)
-                }
-                dialog.show()
+                        with(rvPhoto, {
+                            layoutManager = LinearLayoutManager(context)
+                            setHasFixedSize(true)
+                            adapter = ImagesAdapter(context, this@UpdateItemActivity.list) {
+                                selectImages()
+                            }
+                            if (list.size > 0) {
+                                formimages.visibility = View.GONE
+                            }
+                        })
+                    },
+                    peekHeight = 1600,
+                    showTitle = false,
+                    selectMaxCount = 3,
+                    completeButtonText = getString(R.string.done),
+                    emptySelectionText = "No Selection"
+                ).create(baseContext)
+                kwikPicker.show(supportFragmentManager)
+            }
+            dialog.show()
         }
     }
 
@@ -294,6 +303,8 @@ class UpdateItemActivity : AppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
-        load!!.dismissAllowingStateLoss()
+        if (load?.isAdded!! || load?.isVisible!! ) {
+            load!!.dismissAllowingStateLoss()
+        }
     }
 }

@@ -7,11 +7,11 @@ import mz.co.avana.database.FirebaseConfig
 import mz.co.avana.model.Comment
 import mz.co.avana.utils.Constants
 
-class CommentRepository (private val comment: Comment, val context: Context){
+class CommentRepository(private val comment: Comment, val context: Context) {
     private val databaseReferenceLikes = FirebaseConfig.firebaseDatabase()
         .child(Constants.COMMENTS)
 
-    fun commentAnItem(itemId: String, messageCallback: MessageCallback){
+    fun commentAnItem(itemId: String, messageCallback: MessageCallback) {
         val ref = databaseReferenceLikes.child(itemId).push()
         ref.setValue(comment).addOnSuccessListener {
             messageCallback.onSuccess(context.resources.getString(R.string.comment_sent))

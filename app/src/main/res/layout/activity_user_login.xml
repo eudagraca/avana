@@ -2,9 +2,9 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rl_user_login"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/rl_user_login"
     tools:context=".presentation.ui.user.UserLoginActivity">
 
     <ScrollView
@@ -14,8 +14,9 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:scrollIndicators="none"
-        android:layout_alignParentBottom="true">
+        android:layout_alignParentBottom="true"
+        android:scrollbars="none"
+        android:scrollIndicators="none">
 
 
         <RelativeLayout
@@ -73,8 +74,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/email"
-                        android:inputType="textEmailAddress"
-                    />
+                        android:inputType="textEmailAddress" />
 
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -93,8 +93,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/password"
-                        android:maxLines="1"
-                        android:inputType="textPassword" />
+                        android:inputType="textPassword"
+                        android:maxLines="1" />
 
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -115,10 +115,8 @@
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/signIn"
-                        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                        app:cornerRadius="18dp"
-                        app:strokeColor="@color/colorPrimary"
-                        app:strokeWidth="1dp"                        android:layout_width="match_parent"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/forgotPassword"
                     android:layout_marginTop="12dp"
@@ -126,7 +124,10 @@
                     android:padding="15dp"
                     android:text="@string/login_user"
                     android:textAlignment="center"
-                    android:textAllCaps="false" />
+                    android:textAllCaps="false"
+                    app:cornerRadius="5dp"
+                    app:strokeColor="@color/colorPrimary"
+                    app:strokeWidth="1dp" />
 
 
                 <LinearLayout

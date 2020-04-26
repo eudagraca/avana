@@ -49,6 +49,7 @@
     <ScrollView
         android:id="@+id/scrollForm"
         android:layout_width="match_parent"
+        android:scrollbars="none"
         android:layout_height="wrap_content">
 
         <LinearLayout
@@ -60,12 +61,13 @@
             android:padding="15dp">
 
             <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="@dimen/font_size_small"
-                    android:fontFamily="@font/work_sans_light"
-                    android:text="@string/upload_images_in_png_jpg_or_jpeg_"/>
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/work_sans_medium"
+                android:text="@string/upload_images_in_png_jpg_or_jpeg_"
+                android:textColor="@color/colorPrimary"
+                android:layout_marginBottom="@dimen/default_margin_padding"
+                android:textSize="@dimen/font_size_small" />
 
             <include layout="@layout/list_pictures" />
 
@@ -255,15 +257,16 @@
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/share"
-                        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                        app:cornerRadius="18dp"
-                        app:strokeColor="@color/colorPrimary"
-                        app:strokeWidth="1dp"                        android:layout_width="match_parent"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
                     android:layout_marginEnd="5dp"
                     android:padding="15dp"
-                    android:text="@string/share" />
+                    android:text="@string/share"
+                    app:cornerRadius="5dp"
+                    app:strokeColor="@color/colorPrimary"
+                    app:strokeWidth="1dp" />
 
             </LinearLayout>
 

@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_margin="10dp"
     android:clipChildren="false"
     app:cardCornerRadius="10dp"
     app:cardElevation="1dp"
-    app:cardPreventCornerOverlap="false"
-    android:background="@color/md_white_1000">
+    app:cardPreventCornerOverlap="false">
 
     <RelativeLayout
         android:layout_width="wrap_content"
@@ -31,7 +29,7 @@
 
             <ImageView
                 android:id="@+id/ivItemUser"
-                android:layout_width="150dp"
+                android:layout_width="170dp"
                 android:layout_height="160dp"
                 android:layout_alignParentTop="true"
                 android:layout_marginTop="0dp"
@@ -42,44 +40,26 @@
         </RelativeLayout>
 
         <TextView
-            android:id="@+id/tvEyes"
-            android:layout_below="@id/value"
+            android:id="@+id/tv_delete"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="2"
-            android:textAlignment="center"
-            android:textColor="@color/md_white_1000"
-            android:textSize="@dimen/font_size_medium"
-            android:layout_marginTop="-50dp"
-            android:layout_marginStart="20dp"
-            android:drawableBottom="@drawable/ic_view" />
+            android:layout_below="@id/value"
+            android:layout_margin="10dp"
+            android:drawableStart="@drawable/ic_trash"
+            android:drawablePadding="10dp" />
 
         <TextView
-            android:id="@+id/tvchat"
+            android:id="@+id/tv_update"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/value"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="-50dp"
-            android:layout_toEndOf="@+id/tvEyes"
-            android:drawableBottom="@drawable/ic_chat"
-            android:text="2"
-            android:textAlignment="center"
-            android:textColor="@color/md_white_1000"
-            android:textSize="@dimen/font_size_medium" />
+            android:layout_marginStart="55dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_toEndOf="@id/tv_delete"
+            android:drawableStart="@drawable/ic_update"
+            android:drawablePadding="10dp" />
 
-        <TextView
-            android:id="@+id/tvLikes"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/value"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="-50dp"
-            android:layout_toEndOf="@+id/tvchat"
-            android:drawableBottom="@drawable/ic_heart_simple"
-            android:text="2"
-            android:textAlignment="center"
-            android:textColor="@color/md_white_1000"
-            android:textSize="@dimen/font_size_medium" />
     </RelativeLayout>
 </com.google.android.material.card.MaterialCardView>

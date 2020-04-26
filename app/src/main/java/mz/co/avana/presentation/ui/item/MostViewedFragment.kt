@@ -16,10 +16,7 @@ import kotlinx.android.synthetic.main.fragment_itens.view.*
 import kotlinx.android.synthetic.main.is_blank.view.*
 import kotlinx.android.synthetic.main.loading.view.*
 import mz.co.avana.R
-import mz.co.avana.model.Destaque
-import mz.co.avana.presentation.ui.image.DestaqueAdapter
 import mz.co.avana.utils.Constants
-import mz.co.avana.utils.Message
 import mz.co.avana.utils.Utils
 import mz.co.avana.viewModel.item.ItemViewModel
 
@@ -31,17 +28,23 @@ class MostViewedFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
     private var cityLocation = String()
 
     override fun onCreateView(
-            inflater: LayoutInflater, container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_itens, container, false)
         view!!.loading.visibility = View.VISIBLE
-        cityLocation = Utils.readPreference(Constants.USER_LOCATION_CITY, Constants.LOCATION, activity!!)
+        cityLocation =
+            Utils.readPreference(Constants.USER_LOCATION_CITY, Constants.LOCATION, activity!!)
         view.loading.visibility = View.VISIBLE
         view.lLisBlank.visibility = View.GONE
         getData(view)
         view.swipeRefresh.setOnRefreshListener(this)
-        view.swipeRefresh.setColorSchemeColors(ContextCompat.getColor(context!!, R.color.colorAccent))
+        view.swipeRefresh.setColorSchemeColors(
+            ContextCompat.getColor(
+                context!!,
+                R.color.colorAccent
+            )
+        )
 
 
 //        val imageUrl = ArrayList<Destaque>()
@@ -89,7 +92,7 @@ class MostViewedFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
                 if (items.isEmpty()) {
                     view.lLisBlank.visibility = View.VISIBLE
                     view.tv_isBlank.text = context.getString(R.string.there_are_no_item_hot)
-                }else{
+                } else {
                     view.lLisBlank.visibility = View.GONE
                 }
                 view.loading.visibility = View.GONE

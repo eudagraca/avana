@@ -45,8 +45,8 @@ object Utils {
     @JvmStatic
     @BindingAdapter("imageUrl")
     fun loadImage(
-            view: RoundedImageView,
-            url: String
+        view: RoundedImageView,
+        url: String
     ) { // This methods should not have any return type, = declaration would make it return that object declaration.
         Glide.with(view.context).load(url).into(view)
     }
@@ -54,21 +54,21 @@ object Utils {
     fun loadFragment(fragment: Fragment?, fl: Int, supportFragmentManager: FragmentManager) {
         if (fragment != null) {
             supportFragmentManager
-                    .beginTransaction()
-                    .replace(fl, fragment)
-                    .commit()
+                .beginTransaction()
+                .replace(fl, fragment)
+                .commit()
         }
     }
 
-    fun writeSharedPreferences(key: String, value: String, name: String, activity: Activity){
+    fun writeSharedPreferences(key: String, value: String, name: String, activity: Activity) {
         val sharedPref = activity.getSharedPreferences(name, Context.MODE_PRIVATE)
-        with(sharedPref.edit()){
+        with(sharedPref.edit()) {
             putString(key, value)
             apply()
         }
     }
 
-    fun readPreference(key: String, name: String, activity: Activity):String{
+    fun readPreference(key: String, name: String, activity: Activity): String {
         val sharedPref = activity.getSharedPreferences(name, Context.MODE_PRIVATE)
         return sharedPref.getString(key, "-")!!
     }

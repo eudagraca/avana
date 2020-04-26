@@ -1,13 +1,10 @@
 package mz.co.avana.presentation.ui.item
 
 import android.annotation.SuppressLint
-import android.app.Activity
 import android.app.DatePickerDialog
 import android.app.Dialog
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.net.Uri
@@ -21,7 +18,6 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.recyclerview.widget.LinearLayoutManager
-import co.csadev.kwikpicker.KwikPicker
 import com.asksira.bsimagepicker.BSImagePicker
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.activity_share_item.*
@@ -234,15 +230,15 @@ class ShareItemActivity : AppCompatActivity(), BSImagePicker.OnMultiImageSelecte
             }
 
             val multiSelectionPicker = BSImagePicker.Builder("mz.co.avana.presentation.ui.item")
-               .isMultiSelect //Set this if you want to use multi selection mode.
-               .setMinimumMultiSelectCount(3) //Default: 1.
-               .setMaximumMultiSelectCount(3) //Default: Integer.MAX_VALUE (i.e. User can select as many images as he/she wants)
-               .setMultiSelectBarBgColor(android.R.color.white) //Default: #FFFFFF. You can also set it to a translucent color.
-               .setMultiSelectTextColor(R.color.primary_text) //Default: #212121(Dark grey). This is the message in the multi-select bottom bar.
-               .setMultiSelectDoneTextColor(R.color.colorAccent) //Default: #388e3c(Green). This is the color of the "Done" TextView.
-               .setOverSelectTextColor(R.color.error_text) //Default: #b71c1c. This is the color of the message shown when user tries to select more than maximum select count.
-               .disableOverSelectionMessage() //You can also decide not to show this over select message.
-               .build()
+                .isMultiSelect //Set this if you want to use multi selection mode.
+                .setMinimumMultiSelectCount(3) //Default: 1.
+                .setMaximumMultiSelectCount(3) //Default: Integer.MAX_VALUE (i.e. User can select as many images as he/she wants)
+                .setMultiSelectBarBgColor(android.R.color.white) //Default: #FFFFFF. You can also set it to a translucent color.
+                .setMultiSelectTextColor(R.color.primary_text) //Default: #212121(Dark grey). This is the message in the multi-select bottom bar.
+                .setMultiSelectDoneTextColor(R.color.colorAccent) //Default: #388e3c(Green). This is the color of the "Done" TextView.
+                .setOverSelectTextColor(R.color.error_text) //Default: #b71c1c. This is the color of the message shown when user tries to select more than maximum select count.
+                .disableOverSelectionMessage() //You can also decide not to show this over select message.
+                .build()
 
             multiSelectionPicker.show(supportFragmentManager, "picker")
 
@@ -339,7 +335,7 @@ class ShareItemActivity : AppCompatActivity(), BSImagePicker.OnMultiImageSelecte
 
     override fun onDestroy() {
         super.onDestroy()
-        if(load!!.isVisible){
+        if (load!!.isVisible) {
             load!!.dismissAllowingStateLoss()
         }
     }

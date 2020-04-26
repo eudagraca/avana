@@ -15,7 +15,7 @@ object FirebaseConfig {
         return FirebaseAuth.getInstance()
     }
 
-    fun firebaseFirestore(): FirebaseFirestore{
+    fun firebaseFirestore(): FirebaseFirestore {
         val settings = FirebaseFirestoreSettings.Builder()
             .setPersistenceEnabled(true)
             .setCacheSizeBytes(FirebaseFirestoreSettings.CACHE_SIZE_UNLIMITED)
