@@ -52,7 +52,6 @@ class ItemViewModel : ViewModel() {
                         itemList.add(item)
                     }
                     isLoading = false
-                    Log.i("SSS", itemList.size.toString())
                     itemLiveDataList.value = itemList
                 }
             }.addOnFailureListener { e ->

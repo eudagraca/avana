@@ -126,17 +126,18 @@
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/signUp"
-                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    style="@style/Widget.MaterialComponents.Button"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/passwordSignUp"
                     android:layout_marginTop="12dp"
                     android:background="@drawable/gradient"
-                    android:padding="15dp"
+                    android:padding="10dp"
                     android:text="@string/register_user"
+                    android:textSize="18sp"
                     android:textAlignment="center"
                     android:textAllCaps="false"
-                    app:cornerRadius="5dp"
+                    app:cornerRadius="15dp"
                     app:strokeColor="@color/colorPrimary"
                     app:strokeWidth="1dp" />
 

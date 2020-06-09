@@ -257,15 +257,16 @@
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/share"
-                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    style="@style/Widget.MaterialComponents.Button"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
                     android:layout_marginEnd="5dp"
-                    android:padding="15dp"
+                    android:padding="10dp"
+                    android:textSize="18sp"
+                    android:background="@color/colorPrimary"
                     android:text="@string/share"
-                    app:cornerRadius="5dp"
-                    app:strokeColor="@color/colorPrimary"
+                    app:cornerRadius="15dp"
                     app:strokeWidth="1dp" />
 
             </LinearLayout>
