@@ -8,6 +8,8 @@ App to help people to find products that are be selling at the lowest price on y
 
 <img width="239" alt="image" src="https://raw.githubusercontent.com/eudagraca/avana/master/app/src/main/res/drawable/Screenshot_20191120-224705.png">
 
+  <img width="239" alt="image" src="https://raw.githubusercontent.com/eudagraca/avana/master/app/src/main/res/drawable/Screenshot_20191120-224638.png">
+
 
 </p> 
 
